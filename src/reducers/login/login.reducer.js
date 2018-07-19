@@ -3,24 +3,35 @@ import {
 } from '../../actions/actionTypes/login.actionType'
 
 const initialLoggedIn = {
-	loggedIn: false,
-	token: null
+	isFetching: false,
+	isAuthenticated: localStorage.getItem('x-auth-key') ? true : false
 }
 
 const loginReducer = (state = initialLoggedIn, action) => {
 	switch (action.type) {
-		case LOGIN_ERROR:
+		case LOGIN_LOAD:
 			return Object.assign({}, state, {
-				loggedIn: action.payload
+				isFetching: true,
+				isAuthenticated: false,
+				user: action.creds
 			})
 		case LOGIN_SUCCESS:
 			return Object.assign({}, state, {
-				loggedIn: action.payload,
-				token: action.payload
+				isFetching: false,
+				isAuthenticated: false,
+				errorMessage: ''
+			})
+		case LOGIN_ERROR:
+			return Object.assign({}, state, {
+				isFetching: true,
+				isAuthenticated: false,
+				errorMessage: action.message
 			})
 		case LOG_OUT:
 			return {
-				...state
+				...state,
+				isFetching: true,
+				isAuthenticated: false
 			}
 		default:
 			return state

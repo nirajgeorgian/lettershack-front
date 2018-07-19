@@ -1,42 +1,49 @@
-import { SIGNUP_ERROR, SIGNUP_SUCCESS } from '../actionTypes/signup.actionType'
+import { SIGNUP_ERROR, SIGNUP_SUCCESS, SIGNUP_LOAD } from '../actionTypes/signup.actionType'
 
 // payload is boolean
-export const signupError = payload => ({
+export const signupError = message => ({
 	type: SIGNUP_ERROR,
-	payload
+	message,
+	isFetching: false
 })
 
-export const signupSuccess = payload => ({
+export const signupSuccess = user => ({
 	type: SIGNUP_SUCCESS,
-	payload
+	isFetching: false,
+	user
 })
 
-const signupRequest = (body) => {
+export const signupLoad = creds => ({
+	type: SIGNUP_LOAD,
+	isFetching: true,
+	creds
+})
+
+export const signupUserDispatcher = creds => {
 	const options = {
 		method: 'POST',
 		mode: 'cors',
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(body, null, 2),
+		body: JSON.stringify(creds, null, 2),
 		'catche': 'default'
 	}
-	return fetch('/signup', options)
-		.then(res => res)
-		.catch(err => console.log(err))
-}
-
-export const signupErrorD = (body) => {
-	return async dispatch => {
-		const result = await signupRequest(body)
-		if(result.status === 401) {
-			dispatch(signupError(false))
-			return false
-		} else {
-			const user = await result.json()
-			console.log(user)
-			dispatch(signupSuccess(true))
-			return true
-		}
+	return dispatch => {
+		dispatch(signupLoad(creds))
+		return fetch('/signup', options)
+			.then(res =>
+				res.json()
+					.then(user => ({ user, res }))
+			)
+			.then(({ user, res}) => {
+				if(!res.ok) {
+					dispatch(signupError(user.message))
+					return Promise.reject(user)
+				} else {
+					dispatch(signupSuccess(user))
+					return Promise.resolve(user)
+				}
+			}).catch(err => console.log(err))
 	}
 }

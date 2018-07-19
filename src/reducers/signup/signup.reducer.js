@@ -1,11 +1,28 @@
-import { SIGNUP_ERROR, SIGNUP_SUCCESS } from '../../actions/actionTypes/signup.actionType'
+import { SIGNUP_ERROR, SIGNUP_SUCCESS, SIGNUP_LOAD } from '../../actions/actionTypes/signup.actionType'
 
-const signupReducer = (state = false, action) => {
+const initialState = {
+	isFetching: false
+}
+
+const signupReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case SIGNUP_ERROR:
-			return false
+		case SIGNUP_LOAD:
+			return {
+				...state,
+				user: action.creds,
+			}
 		case SIGNUP_SUCCESS:
-			return true
+			return {
+				...state,
+				isFetching: false,
+				user: action.user
+			}
+		case SIGNUP_ERROR:
+			return {
+				...state,
+				isFetching: false,
+				message: action.message
+			}
 		default:
 			return state
 	}

@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 import {
 	Form, FormGroup, Label, Input, FormText, Col, Button, FormFeedback
 } from 'reactstrap'
-import { signupErrorD } from '../../../actions/actionCreator/signup.action'
+import { signupUserDispatcher } from '../../../actions/actionCreator/signup.action'
 
 class Signup extends Component {
 	state = {
@@ -22,19 +22,26 @@ class Signup extends Component {
 
 	onFormSubmit = async event => {
 		event.preventDefault()
-		const result = await this.props.signupErrorD(this.state)
+		const result = await this.props.signupUserDispatcher(this.state)
+		console.log(result)
 		if(result) {
 			this.props.history.push("/")
 		} else {
 			this.setState({
-				errorMessage: 'User alredy exists'
+				errorMessage: this.props.signup.message
 			})
 		}
 	}
 
+	clearMessage = () => {
+		this.setState({
+			errorMessage: ''
+		})
+	}
+
 	render() {
 		return (
-			<Form onSubmit = { this.onFormSubmit }>
+			<Form onSubmit = { this.onFormSubmit } onFocus = { this.clearMessage }>
 				<FormGroup row>
 					<Label for='email' sm={3}>Email</Label>
 					<Col sm={9}>
@@ -70,11 +77,11 @@ class Signup extends Component {
 }
 
 const mapStateToProps = state => ({
-	state
+	signup: state.signup
 })
 
 const mapDispatchToProps = dispatch => {
-	return bindActionCreators({ signupErrorD }, dispatch)
+	return bindActionCreators({ signupUserDispatcher }, dispatch)
 }
 
 
