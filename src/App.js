@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Container } from 'reactstrap'
 import Lodable from 'react-loadable'
-
-import Auth from './components/navbar/auth/auth.component'
 import Routes from './routes/index'
 
 const AsyncComponent = Lodable({

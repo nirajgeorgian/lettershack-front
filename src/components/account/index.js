@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { Button, Container, Row, Col } from 'reactstrap'
+import { Container } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import Login from './login/login.component'
 import Signup from './signup/signup.component'

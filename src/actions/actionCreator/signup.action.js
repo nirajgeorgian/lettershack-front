@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { SIGNUP_ERROR, SIGNUP_SUCCESS, SIGNUP_LOAD } from '../actionTypes/signup.actionType'
 
 // payload is boolean
@@ -26,24 +27,20 @@ export const signupUserDispatcher = creds => {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(creds, null, 2),
+		body: creds,
 		'catche': 'default'
 	}
 	return dispatch => {
 		dispatch(signupLoad(creds))
-		return fetch('/signup', options)
-			.then(res =>
-				res.json()
-					.then(user => ({ user, res }))
-			)
-			.then(({ user, res}) => {
-				if(!res.ok) {
-					dispatch(signupError(user.message))
-					return Promise.reject(user)
+		return axios('/signup', options)
+			.then(res => {
+				if(!res.status !== 200) {
+					dispatch(signupError(res.data.message))
+					return Promise.reject(res.data)
 				} else {
-					dispatch(signupSuccess(user))
-					return Promise.resolve(user)
+					dispatch(signupSuccess(res.data))
+					return Promise.resolve(res.data)
 				}
-			}).catch(err => console.log(err))
+			}).catch(err => dispatch(signupError(err.message)))
 	}
 }

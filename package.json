@@ -33,17 +33,12 @@
     "start": "node server/server",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "precommit": "npm run build && git add ."
   },
   "proxy": "http://localhost:8080",
   "devDependencies": {
     "husky": "^1.0.0-rc.13",
     "redux-logger": "^3.0.6"
-  },
-  "husky": {
-    "hooks": {
-      "pre-add": "npm run build",
-      "pre-commit": "npm run build"
-    }
   }
 }

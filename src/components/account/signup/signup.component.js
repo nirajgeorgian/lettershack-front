@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 import {
-	Form, FormGroup, Label, Input, FormText, Col, Button, FormFeedback
+	Form, FormGroup, Label, Input, Col, Button, FormFeedback
 } from 'reactstrap'
 import { signupUserDispatcher } from '../../../actions/actionCreator/signup.action'
 
