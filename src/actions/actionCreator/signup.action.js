@@ -27,7 +27,7 @@ export const signupUserDispatcher = creds => {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: creds,
+		data: creds,
 		'catche': 'default'
 	}
 	return dispatch => {
