@@ -17,7 +17,7 @@ const receivedLogout = () => ({
 export const logoutUserDispatcher = () => {
 	return dispatch => {
 		dispatch(requestLogout())
-		localStorage.removeItem('x-auth-token')
+		localStorage.remove('x-auth-key')
 		dispatch(receivedLogout())
 	}
 }

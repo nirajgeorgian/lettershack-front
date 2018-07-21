@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
 import { Container } from 'reactstrap'
-import NavbarComponent from './components/navbar/navbar.component'
+import Lodable from 'react-loadable'
+
 import Auth from './components/navbar/auth/auth.component'
 import Routes from './routes/index'
+
+const AsyncComponent = Lodable({
+	loader: () => import(/* webpackChunkName: "lettershack" */ './components/navbar/navbar.component'),
+	loading: () => <div>Loading...</div>,
+	modules: ['lettershack']
+})
 
 class App extends Component {
   render() {
     return (
 			<div>
-				<NavbarComponent />
+				<AsyncComponent />
 				<Container className="App">
 					<Routes />
 				</Container>

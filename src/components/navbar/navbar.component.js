@@ -11,6 +11,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap'
+import { Link } from 'react-router-dom'
 
 export default class NavbarComponent extends React.Component {
   constructor(props) {
@@ -30,30 +31,30 @@ export default class NavbarComponent extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
+          <Link to="/" className="navbar-brand">reactstrap</Link>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">Components</NavLink>
+							<NavItem>
+                <Link to="/account/login" className="nav-link">Login</Link>
               </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+							<NavItem>
+                <Link to="/account/signup" className="nav-link">Signup</Link>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Options
+                  Username
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>
-                    Option 1
+                    Profile
                   </DropdownItem>
                   <DropdownItem>
-                    Option 2
+                    Pages
                   </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>
-                    Reset
+                    Profile
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>

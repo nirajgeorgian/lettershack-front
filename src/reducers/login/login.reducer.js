@@ -1,10 +1,13 @@
 import {
 	LOGIN_LOAD, LOGIN_ERROR, LOGIN_SUCCESS, LOG_OUT
 } from '../../actions/actionTypes/login.actionType'
+const localStorage = require('web-storage')().localStorage
+
+// localStorage !== undefined ? localStorage.getItem('x-auth-key') ? true : false : false
 
 const initialLoggedIn = {
 	isFetching: false,
-	isAuthenticated: localStorage.getItem('x-auth-key') ? true : false
+	isAuthenticated: localStorage.get('x-auth-key') ? true : false
 }
 
 const loginReducer = (state = initialLoggedIn, action) => {

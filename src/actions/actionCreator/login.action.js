@@ -1,6 +1,8 @@
+import axios from 'axios'
 import {
 	LOGIN_LOAD, LOGIN_ERROR, LOGIN_SUCCESS, LOG_OUT
 } from '..//actionTypes/login.actionType'
+const localStorage = require('web-storage')().localStorage
 
 export const loginLoad = creds => ({
 	type: LOGIN_LOAD,
@@ -34,24 +36,21 @@ export const loginUserDispatcher = creds => {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(creds, null, 2),
+		data: creds,
 		'catche': 'default'
 	}
 	return dispatch => {
 		dispatch(loginLoad(creds))
-		return fetch('/login', options)
-			.then(res =>
-				res.json()
-					.then(user => ({ user, res }))
-			)
-			.then(({ user, res }) => {
-				if(!res.ok) {
-					dispatch(loginError(user.message))
-					return Promise.reject(user)
+		return axios('https://lettershack-api.herokuapp.com/login', options)
+			.then(res => {
+					console.log(res);
+				if(!res.status === 200) {
+					dispatch(loginError(res.data.message))
+					return Promise.reject(res.data)
 				} else {
-					localStorage.setItem('x-auth-token', user.token)
-					dispatch(loginSuccess(user))
+					localStorage.set('x-auth-key', res.data.token)
+					dispatch(loginSuccess(res.data))
 				}
-			}).catch(err => console.log("Error: ", err))
+			}).catch(err => dispatch(loginError(err.message)))
 	}
 }
