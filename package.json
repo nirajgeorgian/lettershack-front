@@ -42,7 +42,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-add": "npm run build"
+      "pre-add": "npm run build",
+      "pre-commit": "npm run build"
     }
   }
 }

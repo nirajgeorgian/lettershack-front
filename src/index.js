@@ -11,7 +11,7 @@ import registerServiceWorker from './registerServiceWorker'
 
 window.onload = () => {
 	Loadable.preloadReady().then(() => {
-		render(
+		hydrate(
 			<Router>
 				<Provider store = {store}>
 					<App />
