@@ -1,12 +1,15 @@
 import path from 'path'
 import express from 'express'
 import React from 'react'
+import cors from 'cors'
 import Loadable from 'react-loadable'
 import serverRenderer from './middleware/renderer'
 import store from '../src/store/index'
 const app = express()
 const router = express.Router()
 
+// enable cors
+app.use(cors())
 // serve static files
 app.use(express.static(path.join(__dirname, "..", "build")))
 const indexAction = (req, res, next) => {
@@ -26,6 +29,6 @@ Loadable.preloadAll().then(() => {
 		if(err) {
 			console.log(err)
 		}
-		console.log(`Running on http://loclhost:${port}`);
+		console.log(`Running on http://localhost:${port}`);
 	})
 })

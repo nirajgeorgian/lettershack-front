@@ -32,7 +32,7 @@ export const signupUserDispatcher = creds => {
 	}
 	return dispatch => {
 		dispatch(signupLoad(creds))
-		return axios('/signup', options)
+		return axios('https://lettershack-api.herokuapp.com/signup', options)
 			.then(res => {
 				if(!res.status !== 200) {
 					dispatch(signupError(res.data.message))

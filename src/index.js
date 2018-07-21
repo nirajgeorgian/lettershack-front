@@ -1,5 +1,5 @@
 import React from 'react'
-import { hydrate } from 'react-dom'
+import { hydrate, render } from 'react-dom'
 import Loadable from 'react-loadable'
 import{ BrowserRouter as Router } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
