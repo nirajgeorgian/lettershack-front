@@ -23,12 +23,11 @@ class Signup extends Component {
 	onFormSubmit = async event => {
 		event.preventDefault()
 		const result = await this.props.signupUserDispatcher(this.state)
-		console.log(result)
-		if(result) {
+		if(result.type !== 'SIGNUP_ERROR') {
 			this.props.history.push("/")
 		} else {
 			this.setState({
-				errorMessage: this.props.signup.message
+				errorMessage: result.message.message
 			})
 		}
 	}
@@ -54,7 +53,7 @@ class Signup extends Component {
 							onChange = { this.onInputChange}
 							invalid = { this.state.errorMessage === '' ? false : true }
 						/>
-						<FormFeedback>Oh noes! that email is already taken</FormFeedback>
+						<FormFeedback>Oh noes! { this.state.errorMessage }</FormFeedback>
 					</Col>
 				</FormGroup>
 				<FormGroup row>

@@ -43,7 +43,7 @@ export const loginUserDispatcher = creds => {
 		dispatch(loginLoad(creds))
 		return axios('https://lettershack-api.herokuapp.com/login', options)
 			.then(res => {
-				if(!res.status !== 200) {
+				if(!res.data.status) {
 					dispatch(loginError(res.data.message))
 					return Promise.reject(res.data)
 				} else {
