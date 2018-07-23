@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { SIGNUP_ERROR, SIGNUP_SUCCESS, SIGNUP_LOAD } from '../actionTypes/signup.actionType'
+import consts from '../../config/const'
 
 // payload is boolean
 export const signupError = message => ({
@@ -32,7 +33,7 @@ export const signupUserDispatcher = creds => {
 	}
 	return dispatch => {
 		dispatch(signupLoad(creds))
-		return axios('https://lettershack-api.herokuapp.com/signup', options)
+		return axios(`${consts.API_URL}/signup`, options)
 			.then(res => {
 				if(!res.data.status) {
 					dispatch(signupError(res.data.message))

@@ -10,8 +10,11 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { logoutUserDispatcher } from '../../actions/actionCreator/logout.action'
 
-export default class NavbarComponent extends React.Component {
+class NavbarComponent extends React.Component {
   constructor(props) {
     super(props);
 
@@ -25,6 +28,10 @@ export default class NavbarComponent extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+
+	handleLogout = event => {
+		this.props.logoutUserDispatcher()
+	}
   render() {
     return (
       <div>
@@ -51,8 +58,8 @@ export default class NavbarComponent extends React.Component {
                     Pages
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>
-                    Profile
+                  <DropdownItem onClick = { this.handleLogout }>
+                    Logout
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
@@ -63,3 +70,9 @@ export default class NavbarComponent extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+	return bindActionCreators({ logoutUserDispatcher }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(NavbarComponent)

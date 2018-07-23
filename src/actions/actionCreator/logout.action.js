@@ -1,6 +1,7 @@
 import {
 	LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE
 } from '../actionTypes/logout.actionType'
+const localStorage = require('web-storage')().localStorage
 
 const requestLogout = () => ({
 	type: LOGOUT_REQUEST,

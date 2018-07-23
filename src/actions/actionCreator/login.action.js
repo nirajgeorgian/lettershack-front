@@ -2,6 +2,7 @@ import axios from 'axios'
 import {
 	LOGIN_LOAD, LOGIN_ERROR, LOGIN_SUCCESS, LOG_OUT
 } from '..//actionTypes/login.actionType'
+import consts from '../../config/const'
 const localStorage = require('web-storage')().localStorage
 
 export const loginLoad = creds => ({
@@ -41,7 +42,7 @@ export const loginUserDispatcher = creds => {
 	}
 	return dispatch => {
 		dispatch(loginLoad(creds))
-		return axios('https://lettershack-api.herokuapp.com/login', options)
+		return axios(`${consts.API_URL}/login`, options)
 			.then(res => {
 				if(!res.data.status) {
 					dispatch(loginError(res.data.message))
@@ -51,5 +52,18 @@ export const loginUserDispatcher = creds => {
 					dispatch(loginSuccess(res.data))
 				}
 			}).catch(err => dispatch(loginError(err.message)))
+	}
+}
+
+export const loginFacebookDispatcher = response => {
+	return dispatch => {
+		if(response.data.status) {
+			localStorage.set('x-auth-key', response.data.user.facebookUserId.token)
+			const user = { ...response.data.user, token: response.data.user.facebookUserId.token }
+			dispatch(loginSuccess(user))
+		} else {
+			dispatch(loginError("There's SOmething wrong!. Please try again"))
+			return Promise.reject(response.data)
+		}
 	}
 }
