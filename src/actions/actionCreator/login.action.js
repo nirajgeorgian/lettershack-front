@@ -55,11 +55,17 @@ export const loginUserDispatcher = creds => {
 	}
 }
 
-export const loginFacebookDispatcher = response => {
+export const socialLoginDispatcher = (response, url) => {
+	let token;
+	if(url.split('/').includes('facebook')) {
+		token = response.data.user.facebookUserId.token
+	} else {
+		token = response.data.user.googleUserId.token
+	}
 	return dispatch => {
 		if(response.data.status) {
-			localStorage.set('x-auth-key', response.data.user.facebookUserId.token)
-			const user = { ...response.data.user, token: response.data.user.facebookUserId.token }
+			localStorage.set('x-auth-key', token)
+			const user = { ...response.data.user, token: token }
 			dispatch(loginSuccess(user))
 		} else {
 			dispatch(loginError("There's SOmething wrong!. Please try again"))
