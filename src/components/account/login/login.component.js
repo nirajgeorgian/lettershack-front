@@ -19,7 +19,6 @@ class Login extends Component {
 	}
 
 	componentWillMount() {
-		console.log(this.props.location.state.from.pathname);
 		if(this.props.location.state) {
 			this.setState({
 				redirect: this.props.location.state.from.pathname

@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
 import {
   Collapse,
   Navbar,
@@ -31,6 +32,7 @@ class NavbarComponent extends React.Component {
 
 	handleLogout = event => {
 		this.props.logoutUserDispatcher()
+		this.props.history.push('/account/login')
 	}
   render() {
     return (
@@ -40,29 +42,58 @@ class NavbarComponent extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-							<NavItem>
-                <Link to="/account/login" className="nav-link">Login</Link>
-              </NavItem>
-							<NavItem>
-                <Link to="/account/signup" className="nav-link">Signup</Link>
-              </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Username
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    Profile
-                  </DropdownItem>
-                  <DropdownItem>
-                    Pages
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem onClick = { this.handleLogout }>
-                    Logout
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+							{
+								this.props.isAuthenticated ? (
+									<React.Fragment>
+										<NavItem>
+											<Link to="/books/create" className="nav-link">Write</Link>
+										</NavItem>
+										<UncontrolledDropdown nav inNavbar>
+			                <DropdownToggle nav caret>
+			                  Find
+			                </DropdownToggle>
+			                <DropdownMenu right>
+			                  <DropdownItem>
+			                    Agents
+			                  </DropdownItem>
+			                  <DropdownItem>
+			                    Publisher
+			                  </DropdownItem>
+			                  <DropdownItem divider />
+			                  <DropdownItem>
+			                    Editors
+			                  </DropdownItem>
+			                </DropdownMenu>
+			              </UncontrolledDropdown>
+										<UncontrolledDropdown nav inNavbar>
+			                <DropdownToggle nav caret>
+			                  Username
+			                </DropdownToggle>
+			                <DropdownMenu right>
+			                  <DropdownItem>
+			                    Profile
+			                  </DropdownItem>
+			                  <DropdownItem>
+			                    Pages
+			                  </DropdownItem>
+			                  <DropdownItem divider />
+			                  <DropdownItem onClick = { this.handleLogout }>
+			                    Logout
+			                  </DropdownItem>
+			                </DropdownMenu>
+			              </UncontrolledDropdown>
+									</React.Fragment>
+									) : (
+										<React.Fragment>
+											<NavItem>
+												<Link to="/account/login" className="nav-link">Login</Link>
+											</NavItem>
+											<NavItem>
+												<Link to="/account/signup" className="nav-link">Signup</Link>
+											</NavItem>
+										</React.Fragment>
+									)
+							}
             </Nav>
           </Collapse>
         </Navbar>
@@ -71,8 +102,14 @@ class NavbarComponent extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+	return {
+		isAuthenticated: state.login.isAuthenticated
+	}
+}
+
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators({ logoutUserDispatcher }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(NavbarComponent)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavbarComponent))
