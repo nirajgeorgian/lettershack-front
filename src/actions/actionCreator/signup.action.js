@@ -33,7 +33,7 @@ export const signupUserDispatcher = creds => {
 	}
 	return dispatch => {
 		dispatch(signupLoad(creds))
-		return axios(`${consts.API_URL}/signup`, options)
+		return axios(`${consts.API_URL}/user/signup`, options)
 			.then(res => {
 				if(!res.data.status) {
 					dispatch(signupError(res.data.message))

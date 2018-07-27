@@ -6,14 +6,14 @@ import Signup from './signup/signup.component'
 
 class Account extends Component {
 	componentDidMount() {
-		// console.log(this.props);
+		// console.log(this.props.location.state);
 	}
 	render() {
 		return (
 			<Container>
 				{
 					this.props.location.pathname === '/account/login' &&
-					<Login />
+					<Login  />
 				}
 				{
 					this.props.location.pathname === '/account/signup' &&

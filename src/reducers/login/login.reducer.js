@@ -21,7 +21,7 @@ const loginReducer = (state = initialLoggedIn, action) => {
 		case LOGIN_SUCCESS:
 			return Object.assign({}, state, {
 				isFetching: false,
-				isAuthenticated: false,
+				isAuthenticated: true,
 				errorMessage: ''
 			})
 		case LOGIN_ERROR:

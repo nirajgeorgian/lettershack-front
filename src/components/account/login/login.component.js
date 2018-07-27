@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import {
 	Form, FormGroup, Label, Input, Col, Button, Row, Container
@@ -13,7 +14,17 @@ class Login extends Component {
 	state = {
 		email: '',
 		password: '',
-		errorMessage: ''
+		errorMessage: '',
+		redirect: ''
+	}
+
+	componentWillMount() {
+		console.log(this.props.location.state.from.pathname);
+		if(this.props.location.state) {
+			this.setState({
+				redirect: this.props.location.state.from.pathname
+			})
+		}
 	}
 
 	onInputChange = event => {
@@ -25,6 +36,9 @@ class Login extends Component {
 	onFormSubmit = async event => {
 		event.preventDefault()
 		await this.props.loginUserDispatcher(this.state)
+		if(this.state.redirect !== '') {
+			return this.props.history.push(this.state.redirect)
+		}
 	}
 
 	render() {

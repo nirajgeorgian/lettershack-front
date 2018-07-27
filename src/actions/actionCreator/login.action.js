@@ -42,7 +42,7 @@ export const loginUserDispatcher = creds => {
 	}
 	return dispatch => {
 		dispatch(loginLoad(creds))
-		return axios(`${consts.API_URL}/login`, options)
+		return axios(`${consts.API_URL}/user/login`, options)
 			.then(res => {
 				if(!res.data.status) {
 					dispatch(loginError(res.data.message))
