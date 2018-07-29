@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 import {
 	Form, FormGroup, Label, Input, Col, Button, FormFeedback
 } from 'reactstrap'
-import { signupUserDispatcher } from '../../../actions/actionCreator/signup.action'
+import { signupUserDispatcher } from '../../../actions/actionCreator/accounts/signup.action'
 
 class Signup extends Component {
 	state = {

@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import {
 	Form, FormGroup, Label, Input, Col, Button, Row, Container
 } from 'reactstrap'
-import { loginUserDispatcher } from '../../../actions/actionCreator/login.action'
+import { loginUserDispatcher } from '../../../actions/actionCreator/accounts/login.action'
 import Auth from '../auth/auth.component'
 import './login.css'
 

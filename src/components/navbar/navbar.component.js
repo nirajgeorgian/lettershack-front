@@ -13,7 +13,7 @@ import {
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { logoutUserDispatcher } from '../../actions/actionCreator/logout.action'
+import { logoutUserDispatcher } from '../../actions/actionCreator/accounts/logout.action'
 
 class NavbarComponent extends React.Component {
   constructor(props) {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Container } from 'reactstrap'
-import Lodable from 'react-loadable'
+import Loadble from 'react-loadable'
 import Routes from './routes/index'
 
-const AsyncComponent = Lodable({
+const AsyncComponent = Loadble({
 	loader: () => import(/* webpackChunkName: "lettershack" */ './components/navbar/navbar.component'),
 	loading: () => <div>Loading...</div>,
 	modules: ['lettershack']

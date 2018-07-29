@@ -1,8 +1,8 @@
 import axios from 'axios'
 import {
 	LOGIN_LOAD, LOGIN_ERROR, LOGIN_SUCCESS, LOG_OUT
-} from '..//actionTypes/login.actionType'
-import consts from '../../config/const'
+} from '../../actionTypes/login.actionType'
+import consts from '../../../config/const'
 const localStorage = require('web-storage')().localStorage
 
 export const loginLoad = creds => ({

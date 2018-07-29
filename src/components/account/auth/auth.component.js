@@ -5,7 +5,7 @@ import GoogleLogin from 'react-google-login'
 import axios from 'axios'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { socialLoginDispatcher } from '../../../actions/actionCreator/login.action'
+import { socialLoginDispatcher } from '../../../actions/actionCreator/accounts/login.action'
 import './auth.css'
 import consts from '../../../config/const'
 

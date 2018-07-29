@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { SIGNUP_ERROR, SIGNUP_SUCCESS, SIGNUP_LOAD } from '../actionTypes/signup.actionType'
-import consts from '../../config/const'
+import { SIGNUP_ERROR, SIGNUP_SUCCESS, SIGNUP_LOAD } from '../../actionTypes/signup.actionType'
+import consts from '../../../config/const'
 
 // payload is boolean
 export const signupError = message => ({
