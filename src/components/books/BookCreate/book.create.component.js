@@ -19,8 +19,19 @@ class BookCreate extends Component {
 		})
 	}
 
+	componentDidMount() {
+		const tagElem = document.querySelector('#tags')
+	}
+
   onFormSubmit = async event => {
     event.preventDefault()
+		const tagList = []
+		for(let i of this.state.tags.split(",")) {
+			tagList.push(i.trim())
+		}
+		this.setState({
+			tagList
+		})
 		await this.props.createBookDispatcher(this.state)
   }
   render() {
@@ -40,8 +51,21 @@ class BookCreate extends Component {
             />
           </Col>
         </FormGroup>
+				<FormGroup row>
+          <Label for='title' sm={3}>Tags</Label>
+          <Col sm={9}>
+            <Input
+              type='text'
+              name='tags'
+              id='tags'
+              placeholder='Enter your tags ..'
+              value = { this.state.tags }
+              onChange = { this.onInputChange}
+            />
+          </Col>
+        </FormGroup>
         <FormGroup row>
-          <Label for='password' sm={3}>Password</Label>
+          <Label for='password' sm={3}>Description</Label>
           <Col sm={9}>
             <Input
               type='textarea'
@@ -55,7 +79,7 @@ class BookCreate extends Component {
         </FormGroup>
         <FormGroup>
           <Col sm={{ size: 9, offset: 3}}>
-            <Button outline color='primary' type="submit">Login</Button>{''}
+            <Button outline color='primary' type="submit">Create Book</Button>{''}
           </Col>
         </FormGroup>
       </Form>
