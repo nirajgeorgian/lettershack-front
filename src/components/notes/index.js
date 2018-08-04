@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Container } from 'reactstrap'
 import NoteCreate from './NoteCreate/note.create.component'
+import AllNotes from './allNotes/notes.all.component'
 
 class Author extends Component {
   render() {
@@ -10,6 +11,10 @@ class Author extends Component {
         {
           this.props.location.pathname === '/notes/create'
           && <NoteCreate />
+        }
+        {
+          this.props.location.pathname === '/notes'
+          && <AllNotes />
         }
       </Container>
     )

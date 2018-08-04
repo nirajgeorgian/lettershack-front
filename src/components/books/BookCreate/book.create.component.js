@@ -33,6 +33,7 @@ class BookCreate extends Component {
 			tagList
 		})
 		await this.props.createBookDispatcher(this.state)
+		this.props.history.push('/books')
   }
   render() {
     return (

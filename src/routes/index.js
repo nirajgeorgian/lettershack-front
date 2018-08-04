@@ -41,8 +41,10 @@ class Routes extends Component {
 				{/* <Route exact path='/account' component={Account} /> */}
 				<Route exact path='/account/login' component={AsyncAccountComponent} />
 				<Route exact path='/account/signup' component={AsyncAccountComponent} />
+				<PrivateRoute exact path='/books' component={AsyncBookComponent} />
 				<PrivateRoute exact path='/books/create' component={AsyncBookComponent} />
 				<PrivateRoute exact path="/book/:id" component={AsyncBookComponent} />
+				<PrivateRoute exact path='/notes' component={AsyncNoteComponent} />
 				<PrivateRoute exact path='/notes/create' component={AsyncNoteComponent} />
 				<PrivateRoute exact path='/account/profile' component={Profile} />
 				<Route path='*' component={ErrorPage} />
