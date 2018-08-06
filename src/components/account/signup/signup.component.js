@@ -14,6 +14,12 @@ class Signup extends Component {
 		errorMessage: ''
 	}
 
+	componentWillMount() {
+		if(this.props.login.isAuthenticated) {
+			return this.props.history.push('/')
+		}
+	}
+
 	onInputChange = event => {
 		this.setState({
 			[event.target.id]: event.target.value
@@ -76,7 +82,8 @@ class Signup extends Component {
 }
 
 const mapStateToProps = state => ({
-	signup: state.signup
+	signup: state.signup,
+	login: state.login
 })
 
 const mapDispatchToProps = dispatch => {

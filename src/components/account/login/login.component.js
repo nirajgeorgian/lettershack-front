@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import {
 	Form, FormGroup, Label, Input, Col, Button, Row, Container
 } from 'reactstrap'
+import { LOGIN_SUCCESS } from '../../../actions/actionTypes/login.actionType'
 import { loginUserDispatcher } from '../../../actions/actionCreator/accounts/login.action'
 import Auth from '../auth/auth.component'
 import './login.css'
@@ -19,6 +20,10 @@ class Login extends Component {
 	}
 
 	componentWillMount() {
+		if(this.props.state.login.isAuthenticated) {
+			return this.props.history.push('/')
+		}
+		console.log(this.props.state.login.isAuthenticated)
 		if(this.props.location.state) {
 			this.setState({
 				redirect: this.props.location.state.from.pathname
@@ -34,11 +39,17 @@ class Login extends Component {
 
 	onFormSubmit = async event => {
 		event.preventDefault()
-		await this.props.loginUserDispatcher(this.state)
-		if(this.state.redirect !== '') {
-			return this.props.history.push(this.state.redirect)
+		const res = await this.props.loginUserDispatcher(this.state)
+		if(res.type === LOGIN_SUCCESS) {
+			if(this.state.redirect !== '') {
+				return this.props.history.push(this.state.redirect)
+			} else {
+				return this.props.history.push('/')
+			}
 		} else {
-			return this.props.history.push('/')
+			this.setState({
+				errorMessage: res.message
+			})
 		}
 	}
 

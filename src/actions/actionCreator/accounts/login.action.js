@@ -48,11 +48,10 @@ export const loginUserDispatcher = creds => {
 		return axios(`${consts.API_URL}/user/login`, options)
 			.then(res => {
 				if(!res.data.status) {
-					dispatch(loginError(res.data.message))
-					return Promise.reject(res.data)
+					return dispatch(loginError(res.data.message))
 				} else {
 					localStorage.set('x-auth-key', res.data.token)
-					dispatch(loginSuccess(res.data))
+					return dispatch(loginSuccess(res.data))
 				}
 			}).catch(err => dispatch(loginError(err.message)))
 	}
