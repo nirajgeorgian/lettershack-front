@@ -15,6 +15,7 @@ class Login extends Component {
 	state = {
 		email: '',
 		password: '',
+		username: '',
 		errorMessage: '',
 		redirect: ''
 	}
@@ -23,7 +24,6 @@ class Login extends Component {
 		if(this.props.state.login.isAuthenticated) {
 			return this.props.history.push('/')
 		}
-		console.log(this.props.state.login.isAuthenticated)
 		if(this.props.location.state) {
 			this.setState({
 				redirect: this.props.location.state.from.pathname
@@ -36,6 +36,8 @@ class Login extends Component {
 			[event.target.id]: event.target.value
 		})
 	}
+
+
 
 	onFormSubmit = async event => {
 		event.preventDefault()
