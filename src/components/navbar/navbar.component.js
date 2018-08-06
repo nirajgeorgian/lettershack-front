@@ -17,8 +17,7 @@ import { logoutUserDispatcher } from '../../actions/actionCreator/accounts/logou
 
 class NavbarComponent extends React.Component {
   constructor(props) {
-    super(props);
-
+    super(props)
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false
@@ -32,7 +31,7 @@ class NavbarComponent extends React.Component {
 
 	handleLogout = event => {
 		this.props.logoutUserDispatcher()
-		this.props.history.push('/account/login')
+		return this.props.history.push('/account/login')
 	}
   render() {
     return (

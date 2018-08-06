@@ -1,6 +1,7 @@
 import {
-	LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE
+	LOGOUT_REQUEST
 } from '../../actionTypes/logout.actionType'
+import { logOut } from './login.action'
 const localStorage = require('web-storage')().localStorage
 
 const requestLogout = () => ({
@@ -9,16 +10,10 @@ const requestLogout = () => ({
 	isAuthenticated: true
 })
 
-const receivedLogout = () => ({
-	type: LOGOUT_SUCCESS,
-	isFetching: false,
-	isAuthenticated: false
-})
-
 export const logoutUserDispatcher = () => {
 	return dispatch => {
 		dispatch(requestLogout())
 		localStorage.remove('x-auth-key')
-		dispatch(receivedLogout())
+		dispatch(logOut())
 	}
 }

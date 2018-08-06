@@ -37,6 +37,8 @@ class Login extends Component {
 		await this.props.loginUserDispatcher(this.state)
 		if(this.state.redirect !== '') {
 			return this.props.history.push(this.state.redirect)
+		} else {
+			return this.props.history.push('/')
 		}
 	}
 
@@ -79,7 +81,7 @@ class Login extends Component {
 				<hr></hr>
 				<Row>
 					<Col sm={{ size: 9, offset: 3 }}>
-						<Auth />
+						<Auth redirect={this.state.redirect} />
 					</Col>
 				</Row>
 			</Container>

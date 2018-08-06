@@ -27,7 +27,10 @@ export const loginSuccess = user => ({
 })
 
 export const logOut = () => ({
-	type: LOG_OUT
+	type: LOG_OUT,
+	isFetching: false,
+	isAuthenticated: false,
+	id_token: null
 })
 
 export const loginUserDispatcher = creds => {
@@ -63,6 +66,7 @@ export const socialLoginDispatcher = (response, url) => {
 		token = response.data.user.googleUserId.token
 	}
 	return dispatch => {
+		dispatch(loginLoad({token: token}))
 		if(response.data.status) {
 			localStorage.set('x-auth-key', token)
 			const user = { ...response.data.user, token: token }

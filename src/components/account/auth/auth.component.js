@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { Container , Row, Col} from 'reactstrap'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import GoogleLogin from 'react-google-login'
@@ -10,6 +11,16 @@ import './auth.css'
 import consts from '../../../config/const'
 
 class Auth extends Component {
+	state = {
+		redirect: ''
+	}
+	componentWillMount() {
+		if(this.props.redirect) {
+			this.setState({
+				redirect: this.props.redirect
+			})
+		}
+	}
 	authResponse = async (response, url) => {
 		const token = response.accessToken
 		const options = {
@@ -17,6 +28,7 @@ class Auth extends Component {
 			mode: 'cors',
 			headers: {
         'Content-Type': 'application/json; charset=utf-8',
+				'Access-Control-Allow-Origin': '*'
       },
 			data: {
 				access_token: token
@@ -25,17 +37,19 @@ class Auth extends Component {
 		}
 		const data = await axios(`${consts.API_URL}/${url}`, options)
 		await this.props.socialLoginDispatcher(data, url)
-	}
-	googleResponse = async response => {
-		console.log(response)
+		if(this.state.redirect !== '') {
+			return this.props.history.push(this.state.redirect)
+		} else {
+			return this.props.history.push('/')
+		}
 	}
 	render() {
 		return (
 			<Row>
 				<Col>
 					<FacebookLogin
-						autoLoad
 						appId="517391568694969"
+						autoLoad={false}
 						callback={res => this.authResponse(res, 'auth/facebook')}
 						render = { renderProps => (
 							<button onClick={renderProps.onClick} className='btn btn-outline-primary'>Login with facebook</button>
@@ -60,4 +74,4 @@ const mapDispathToProps = dispatch => {
 	return bindActionCreators({ socialLoginDispatcher }, dispatch)
 }
 
-export default connect(null, mapDispathToProps)(Auth)
+export default withRouter(connect(null, mapDispathToProps)(Auth))

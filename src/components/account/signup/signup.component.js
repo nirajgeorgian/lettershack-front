@@ -24,7 +24,7 @@ class Signup extends Component {
 		event.preventDefault()
 		const result = await this.props.signupUserDispatcher(this.state)
 		if(result.type !== 'SIGNUP_ERROR') {
-			this.props.history.push("/")
+			this.props.history.push("/account/login")
 		} else {
 			this.setState({
 				errorMessage: result.message.message

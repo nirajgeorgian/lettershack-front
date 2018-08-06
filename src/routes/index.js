@@ -7,6 +7,7 @@ import PrivateRoute from './protectedRoutes/protected.routes'
 // import Account from '../components/account/index'
 import Profile from '../components/profile/profile.component'
 import Notes from '../components/books/index'
+import Homepage from '../components/home/home.component'
 // import Books from '../components/books/index'
 
 const AsyncAccountComponent = Loadable({
@@ -37,7 +38,7 @@ class Routes extends Component {
 	render() {
 		return (
 			<Switch>
-				<Route exact path='/' />
+				<Route exact path='/' component={Homepage}/>
 				{/* <Route exact path='/account' component={Account} /> */}
 				<Route exact path='/account/login' component={AsyncAccountComponent} />
 				<Route exact path='/account/signup' component={AsyncAccountComponent} />
