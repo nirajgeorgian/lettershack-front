@@ -47,6 +47,9 @@ class NavbarComponent extends React.Component {
 										<NavItem>
 											<Link to="/books/create" className="nav-link">Write</Link>
 										</NavItem>
+										<NavItem>
+											<Link to="/notes/create" className="nav-link">create notes</Link>
+										</NavItem>
 										<UncontrolledDropdown nav inNavbar>
 			                <DropdownToggle nav caret>
 			                  Find

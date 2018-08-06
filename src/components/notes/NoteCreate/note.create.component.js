@@ -9,7 +9,8 @@ import options from '../../../config/options'
 
 class NoteCreate extends Component {
   state = {
-    books: []
+    books: [],
+		bookId: ''
   }
   async componentWillMount() {
     const books = await axios(`${config.API_URL}/books`,  options())
@@ -26,6 +27,7 @@ class NoteCreate extends Component {
     this.setState({
       [event.target.id]: event.target.value
     })
+		console.log(event.target.value)
   }
   formSubmit = async event => {
     event.preventDefault()
@@ -47,7 +49,7 @@ class NoteCreate extends Component {
               <input type='text' id='description' placeholder='enter description' onChange={this.onInputChange} /><br /><br />
               <textarea rows='5' cols='10' id='content' placeholder='enter your notes' onChange={this.onInputChange} /><br /><br />
               <label>Choose book to publish with</label>
-              <select id='bookId' onChange={this.onInputChange}>
+              <select id='bookId' name='bookId' onChange={this.onInputChange} onClick={this.onInputChange}>
                 {
                   this.state.books.map((book, key) => {
                     return <option key={key} value={book._id}>{book.title}</option>

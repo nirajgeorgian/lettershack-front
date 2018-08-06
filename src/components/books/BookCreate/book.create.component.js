@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import {
 	Form, FormGroup, Label, Input, Col, Button, Row, Container
 } from 'reactstrap'
+import { Link } from 'react-router-dom'
 import { createBookDispatcher } from '../../../actions/actionCreator/books/books.action'
 
 class BookCreate extends Component {
@@ -84,6 +85,7 @@ class BookCreate extends Component {
           </Col>
         </FormGroup>
       </Form>
+			<Link to='/books'>All Books</Link>
       </Container>
     )
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
@@ -14,7 +15,7 @@ class AllBook extends Component {
   async componentWillMount() {
     const books = await axios(`${config.API_URL}/books`,  options())
     this.setState({
-      books: books.data
+      books: books.data.books
     })
   }
   bookDetails = id => {
@@ -33,12 +34,14 @@ class AllBook extends Component {
                   <div key={id} onClick={() => this.bookDetails(book._id)}>
                     <h2>{book.title}</h2>
                     <h3>{book.description}</h3>
+										<hr />
                   </div>
                 ))
               }
             </div>
           )
         }
+				<Link to='/books/create'>Create new Book</Link>
       </div>
     )
   }
