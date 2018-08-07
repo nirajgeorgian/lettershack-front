@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
@@ -9,14 +9,25 @@ import options from '../../../config/options'
 
 class AllNotes extends Component {
   state = {
-    notes: []
+    notes: [],
+		bookId: ''
   }
   async componentWillMount() {
-    const notes = await axios(`${config.API_URL}/notes`,  options())
-    this.setState({
-      notes: notes.data.notes.docs
+		if(!this.props.location.state) {
+			// if(!this.props.location.state.id) {
+				return this.props.history.push("/books")
+			// }
+		} else {
+			await this.setState({
+				bookId: this.props.location.state.id
+			})
+		}
+    const booksData = await axios(`${config.API_URL}/books`,  options())
+		const books = booksData.data.books
+		const notes = books.filter(book => book._id === this.state.bookId)
+    await this.setState({
+      notes: notes[0].chapters
     })
-    console.log(notes.data.notes)
   }
   noteDetails = id => {
     console.log("pushed it")
@@ -42,6 +53,10 @@ class AllNotes extends Component {
                   )
                 })
               }
+							<Link to= {{
+								pathname: '/notes/create',
+								state: { id: this.state.bookId }
+							}}>Add new Chapter</Link>
             </div>
           )
         }
