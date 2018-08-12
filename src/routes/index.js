@@ -6,6 +6,7 @@ import PrivateRoute from './protectedRoutes/protected.routes'
 // Import Component for render
 // import Account from '../components/account/index'
 import Profile from '../components/profile/profile.component'
+import User from '../components/profile/userpage.component'
 import Notes from '../components/books/index'
 import Homepage from '../components/home/home.component'
 // import Books from '../components/books/index'
@@ -48,6 +49,7 @@ class Routes extends Component {
 				<PrivateRoute exact path='/notes' component={AsyncNoteComponent} />
 				<PrivateRoute exact path='/notes/create' component={AsyncNoteComponent} />
 				<PrivateRoute exact path='/account/profile' component={Profile} />
+				<PrivateRoute exact path='/user/:id' component={User} />
 				<Route path='*' component={ErrorPage} />
 			</Switch>
 		)

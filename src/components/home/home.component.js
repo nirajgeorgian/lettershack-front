@@ -54,7 +54,7 @@ function SimpleMediaCard(props) {
         <h4> Picks of the week</h4>
         </Grid>
         <Grid item xs={4}>
-          <Paper className={classes.paper}>xs=4</Paper>
+          <Paper className={classes.paper}>List of highest rated books submitted in the past week. </Paper>
         </Grid>
         <Grid item xs={4}>
           <Paper className={classes.paper}>xs=4</Paper>

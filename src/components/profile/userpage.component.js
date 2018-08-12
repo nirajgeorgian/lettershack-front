@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -6,52 +6,63 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { Link } from "react-router-dom";
+import UserTabs from "./userpage.tabComponent";
 
-
-const styles =  theme =>({	
+const styles = {
   card: {
-    maxWidth: 500,
-    marginTop: 30,
-    display: 'flex',
+	marginTop:30,
+    maxWidth: 345,
   },
   media: {
-    width: 200	,
-    height: 200,
     paddingTop: '56.25%', // 16:9
   },
-});
+};
 
-function BookCard(props) {
-	
-	  const { classes } = props;
-    return (
-      <div>
-		<Card className={classes.card}>
+function UserPage(props) {
+  const { classes } = props;
+  return (
+    <div>
+     <Grid container spacing={24}>
+    <Grid item xs={3}>
+      <Card className={classes.card}>
         <CardMedia
           className={classes.media}
-          image="https://media.istockphoto.com/photos/book-cover-picture-id182732882?k=6&m=182732882&s=612x612&w=0&h=ocWwCf4oBKdYf-zLL2ktsqrBZbx9hgXw5xus2r5Gnbs="
+          image="/static/images/cards/contemplative-reptile.jpg"
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">
-            <Link to ="/books"> Book1</Link>
+            Author Name
           </Typography>
-          <Link to="/user/1">Author</Link>
           <Typography component="p">
             Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
             across all continents except Antarctica
           </Typography>
-          
         </CardContent>
-        
+        <CardActions>
+          <Button size="small" color="primary">
+            About
+          </Button>
+          <Button size="small" color="primary">
+            Learn More
+          </Button>
+        </CardActions>
       </Card>
-      </div>
-    )
+      </Grid>
+      <Grid item xs={6}>
+		<UserTabs/>
+      </Grid>
+      <Grid item xs = {3}>
+      </Grid>
+      </Grid>
+    </div>
+  );
 }
-BookCard.propTypes = {
+
+UserPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(BookCard);
+export default withStyles(styles)(UserPage);
