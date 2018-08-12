@@ -19,7 +19,10 @@ class AllBook extends Component {
     })
   }
   bookDetails = id => {
-    console.log("pushed it")
+    this.props.history.push({
+			pathname: "/notes",
+			state: { id }
+		})
   }
   render() {
     return (

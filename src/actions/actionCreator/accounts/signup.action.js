@@ -36,11 +36,11 @@ export const signupUserDispatcher = creds => {
 		return axios(`${consts.API_URL}/user/signup`, options)
 			.then(res => {
 				if(!res.data.status) {
-					dispatch(signupError(res.data.message))
-					return Promise.reject(res.data)
+					return dispatch(signupError(res.data.message))
+					// return Promise.reject(res.data)
 				} else {
-					dispatch(signupSuccess(res.data))
-					return Promise.resolve(res.data)
+					return dispatch(signupSuccess(res.data))
+					// return Promise.resolve(res.data)
 				}
 			}).catch(err => dispatch(signupError(err)))
 	}

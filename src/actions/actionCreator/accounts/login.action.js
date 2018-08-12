@@ -3,6 +3,7 @@ import {
 	LOGIN_LOAD, LOGIN_ERROR, LOGIN_SUCCESS, LOG_OUT
 } from '../../actionTypes/login.actionType'
 import consts from '../../../config/const'
+import options from '../../../config/options'
 const localStorage = require('web-storage')().localStorage
 
 export const loginLoad = creds => ({
@@ -34,18 +35,9 @@ export const logOut = () => ({
 })
 
 export const loginUserDispatcher = creds => {
-	const options = {
-		method: 'POST',
-		mode: 'cors',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		data: creds,
-		'catche': 'default'
-	}
 	return dispatch => {
 		dispatch(loginLoad(creds))
-		return axios(`${consts.API_URL}/user/login`, options)
+		return axios(`${consts.API_URL}/user/login`, options('POST', creds))
 			.then(res => {
 				if(!res.data.status) {
 					return dispatch(loginError(res.data.message))

@@ -6,6 +6,7 @@ import GoogleLogin from 'react-google-login'
 import axios from 'axios'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import options from './../../../config/options'
 import { socialLoginDispatcher } from '../../../actions/actionCreator/accounts/login.action'
 import './auth.css'
 import consts from '../../../config/const'
@@ -23,19 +24,7 @@ class Auth extends Component {
 	}
 	authResponse = async (response, url) => {
 		const token = response.accessToken
-		const options = {
-			method: 'POST',
-			mode: 'cors',
-			headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-				'Access-Control-Allow-Origin': '*'
-      },
-			data: {
-				access_token: token
-			},
-			cache: 'default'
-		}
-		const data = await axios(`${consts.API_URL}/${url}`, options)
+		const data = await axios(`${consts.API_URL}/${url}`, options('POST', { access_token: token }))
 		await this.props.socialLoginDispatcher(data, url)
 		if(this.state.redirect !== '') {
 			return this.props.history.push(this.state.redirect)

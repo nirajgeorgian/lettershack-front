@@ -13,7 +13,17 @@ class NoteCreate extends Component {
 		bookId: ''
   }
   async componentWillMount() {
+		if(!this.props.location.state) {
+			// if(!this.props.location.state.id) {
+				return this.props.history.push("/books")
+			// }
+		} else {
+			await this.setState({
+				bookId: this.props.location.state.id
+			})
+		}
     const books = await axios(`${config.API_URL}/books`,  options())
+		console.log(books);
     this.setState({
       books: books.data.books
     })
@@ -45,17 +55,17 @@ class NoteCreate extends Component {
           ? <div>loading... </div>
           : (
             <form onSubmit={this.formSubmit}>
+							<h2>Add Chapter</h2>
               <input type='text' id='title' placeholder='enter title' onChange={this.onInputChange} /><br /><br />
               <input type='text' id='description' placeholder='enter description' onChange={this.onInputChange} /><br /><br />
-              <textarea rows='5' cols='10' id='content' placeholder='enter your notes' onChange={this.onInputChange} /><br /><br />
-              <label>Choose book to publish with</label>
-              <select id='bookId' name='bookId' onChange={this.onInputChange} onClick={this.onInputChange}>
+              <textarea rows='5' id='content' placeholder='enter your notes' onChange={this.onInputChange} /><br /><br />
+              {/* <select id='bookId' name='bookId' onChange={this.onInputChange} onClick={this.onInputChange}>
                 {
                   this.state.books.map((book, key) => {
                     return <option key={key} value={book._id}>{book.title}</option>
                   })
                 }
-              </select><br /><br />
+              </select><br /><br /> */}
               <button type='submit'>Submit</button>
             </form>
           )
