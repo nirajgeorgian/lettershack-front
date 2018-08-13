@@ -9,6 +9,7 @@ import Profile from '../components/profile/profile.component'
 import User from '../components/profile/userpage.component'
 import Notes from '../components/books/index'
 import Homepage from '../components/home/home.component'
+import Containers from '../containers/index'
 // import Books from '../components/books/index'
 
 const AsyncAccountComponent = Loadable({
@@ -42,6 +43,7 @@ class Routes extends Component {
 				<Route exact path='/' component={Homepage}/>
 				{/* <Route exact path='/account' component={Account} /> */}
 				<Route exact path='/account/login' component={AsyncAccountComponent} />
+				<Route exact path='/component' component={Containers} />
 				<Route exact path='/account/signup' component={AsyncAccountComponent} />
 				<PrivateRoute exact path='/books' component={AsyncBookComponent} />
 				<PrivateRoute exact path='/books/create' component={AsyncBookComponent} />

@@ -1,5 +1,5 @@
 const consts = {
-	API_URL : 'https://lettershack-api.herokuapp.com/'
+	API_URL : 'http://localhost:8080/'
 }
 
 export default consts

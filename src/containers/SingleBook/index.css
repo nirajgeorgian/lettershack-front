@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+}
+
+.image {
+  flex-grow: 1;
+  margin: -25px 10px 50px 20px;
+  z-index: 10;
+  padding-right: 20px;
+  align-self: flex-start;
+}
+
+.image img {
+  height: 250px;
+  width: 150px;
+  border: 0.3px solid lightgrey;
+  border-radius: 2px;
+  box-shadow: 1px 1px 5px lightgrey;
+}
+
+.image img:hover {
+  box-shadow: 4px 4px 5px lightgrey;
+}
+
+
+.content {
+  flex-grow: 3;
+  justify-content: center;
+}
+
+.content h4 {
+  opacity: 0.8;
+}
+
+.content .fade {
+  opacity: 0.6;
+}
+
+.content h3 {
+  text-transform: capitalize;
+}

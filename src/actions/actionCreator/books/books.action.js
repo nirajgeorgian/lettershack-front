@@ -26,6 +26,7 @@ const BookCreateError = err => ({
 export const createBookDispatcher = data => {
   return dispatch => {
     dispatch(BookCreateFetch(data))
+		console.log(options('POST', data=data));
     return axios(`${config.API_URL}/books`,  options('POST', data=data))
       .then(res => {
         if(res.data.status) {
