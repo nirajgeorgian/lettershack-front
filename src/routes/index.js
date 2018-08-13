@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
+
+// #ErrorBoundary so no page causing error
+import ErrorBoundary from '../config/ErrorBoundary/ErrorBoundary'
 import PrivateRoute from './protectedRoutes/protected.routes'
 
 // Import Component for render
@@ -39,21 +42,23 @@ const ErrorPage = props => (
 class Routes extends Component {
 	render() {
 		return (
-			<Switch>
-				<Route exact path='/' component={Homepage}/>
-				{/* <Route exact path='/account' component={Account} /> */}
-				<Route exact path='/account/login' component={AsyncAccountComponent} />
-				<Route exact path='/component' component={Containers} />
-				<Route exact path='/account/signup' component={AsyncAccountComponent} />
-				<PrivateRoute exact path='/books' component={AsyncBookComponent} />
-				<PrivateRoute exact path='/books/create' component={AsyncBookComponent} />
-				<PrivateRoute exact path="/book/:id" component={AsyncBookComponent} />
-				<PrivateRoute exact path='/notes' component={AsyncNoteComponent} />
-				<PrivateRoute exact path='/notes/create' component={AsyncNoteComponent} />
-				<PrivateRoute exact path='/account/profile' component={Profile} />
-				<PrivateRoute exact path='/user/:id' component={User} />
-				<Route path='*' component={ErrorPage} />
-			</Switch>
+			<ErrorBoundary>
+				<Switch>
+					<Route exact path='/' component={Homepage}/>
+					{/* <Route exact path='/account' component={Account} /> */}
+					<Route exact path='/account/login' component={AsyncAccountComponent} />
+					<Route exact path='/component' component={Containers} />
+					<Route exact path='/account/signup' component={AsyncAccountComponent} />
+					<PrivateRoute exact path='/books' component={AsyncBookComponent} />
+					<PrivateRoute exact path='/books/create' component={AsyncBookComponent} />
+					<PrivateRoute exact path="/book/:id" component={AsyncBookComponent} />
+					<PrivateRoute exact path='/notes' component={AsyncNoteComponent} />
+					<PrivateRoute exact path='/notes/create' component={AsyncNoteComponent} />
+					<PrivateRoute exact path='/account/profile' component={Profile} />
+					<PrivateRoute exact path='/user/:id' component={User} />
+					<Route path='*' component={ErrorPage} />
+				</Switch>
+			</ErrorBoundary>
 		)
 	}
 }
