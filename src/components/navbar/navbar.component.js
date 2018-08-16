@@ -62,9 +62,13 @@ class NavbarComponent extends React.Component {
 	handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
-  
+
+ handleProfileRedirect = () =>{
+  return this.props.history.push('/account/profile')
+ } 
  handleClose = () => {
     this.setState({ anchorEl: null });
+    this.handleProfileRedirect();
   };
 
 
