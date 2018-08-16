@@ -11,89 +11,56 @@ import { Link } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import BookCard from '../books/BookList/bookcard.component';
+import SingleBookComponent from '../../containers/SingleBook/index'
+import classes from './home.component.css'
+import { data } from './data'
 
-const styles =  theme =>({
-	root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },	
-  card: {
-    maxWidth: 345,
-    marginTop: 30,
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-});
-
-function SimpleMediaCard(props) {
-  const { classes } = props;
-  return (
-    <div>
-    
-    <Grid container spacing={24}>
-    <Grid item xs={6}>
-    <BookCard/>
-      </Grid>
-       <Grid item xs={6}>
-    <BookCard/>
-      </Grid>
-           
-		<Grid item xs={6}>
-          <Paper className={classes.paper}>xs=6</Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>xs=6</Paper>
-        </Grid><br/>
-        <Grid item xs = {12}>
-        <h4> Picks of the week</h4>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>List of highest rated books submitted in the past week. </Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>xs=4</Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>xs=4</Paper>
-        </Grid>
-        <Grid item xs = {12}>
-        <h4> Recommended</h4>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>xs=4</Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>xs=4</Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>xs=4</Paper>
-        </Grid>
-        <Grid item xs = {12}>
-        <h4> Top 20</h4>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>xs=4</Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>xs=4</Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>xs=4</Paper>
-        </Grid>
-     </Grid>
-    </div>
-  );
+class HomeComponent extends Component {
+	render() {
+		return (
+			<div className={classes.container}>
+				<Grid container spacing={16}>
+					<Grid item xs={12} md={2} lg={2}>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					</Grid>
+					<Grid item xs={12} md={10} lg={10}>
+						<Grid container spacing={32}>
+							<Grid item xs={12} sm={6} md={6} lg={6} xl={16}>
+								<SingleBookComponent data={data} />
+							</Grid>
+							<Grid item xs={12} md={6} lg={6} sm={6} xl={6}>
+								<SingleBookComponent data={data} />
+							</Grid>
+						</Grid>
+						<Grid container spacing={32}>
+							<Grid item xs={12} sm={6} md={6} lg={6} xl={16}>
+								<SingleBookComponent data={data} />
+							</Grid>
+							<Grid item xs={12} md={6} lg={6} sm={6} xl={6}>
+								<SingleBookComponent data={data} />
+							</Grid>
+						</Grid>
+						<Grid container spacing={32}>
+							<Grid item xs={12} sm={6} md={6} lg={6} xl={16}>
+								<SingleBookComponent data={data} />
+							</Grid>
+							<Grid item xs={12} md={6} lg={6} sm={6} xl={6}>
+								<SingleBookComponent data={data} />
+							</Grid>
+						</Grid>
+						<Grid container spacing={32}>
+							<Grid item xs={12} sm={6} md={6} lg={6} xl={16}>
+								<SingleBookComponent data={data} />
+							</Grid>
+							<Grid item xs={12} md={6} lg={6} sm={6} xl={6}>
+								<SingleBookComponent data={data} />
+							</Grid>
+						</Grid>
+					</Grid>
+		    </Grid>
+			</div>
+		)
+	}
 }
 
-SimpleMediaCard.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(SimpleMediaCard);
-
+export default HomeComponent

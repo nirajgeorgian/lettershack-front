@@ -1,4 +1,14 @@
-.container {
+.display {
+  display: none;
+}
+
+.cover {
+  width: "250px";
+  height: "150px";
+}
+
+
+/* .container {
   display: flex;
 }
 
@@ -38,4 +48,4 @@
 
 .content h3 {
   text-transform: capitalize;
-}
+} */
