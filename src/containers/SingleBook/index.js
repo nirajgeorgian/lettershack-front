@@ -39,7 +39,7 @@ class SingleBookContainer extends Component {
 								title="Live from space album cover"
 							/>
 						</Grid>
-						<Grid item xs={8} sm={8} lg={8}>
+						<Grid item xs={8} sm={8} lg={8} className={classes.contentitem}>
 							<CardHeader
 								className={classes.title}
 								title={data.title}
