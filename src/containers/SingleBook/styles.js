@@ -8,7 +8,7 @@ export const styles = {
 	},
 	cover: {
 		width: "100%",
-		height: "235px",
+		height: "250px",
 		border: "0.5px solid lightgrey",
 		borderRadius: "5px",
 		boxShadow: "2px 2px 5px lightgrey",
@@ -18,13 +18,16 @@ export const styles = {
 	content: {
 		marginTop: "-2.2rem"
 	},
+	contentitem: {
+		marginTop: '-1rem'
+	},
 	title: {
 		fontWeight: "0.7rem",
 		opacity: "0.75",
 		textTransform: "capitalize"
 	},
 	ratings: {
-		marginTop: "1rem"
+		marginTop: "0.7rem"
 	},
 	star: {
 		color: "#FF9700"
@@ -37,10 +40,11 @@ export const styles = {
 	para: {
 		color: "grey",
 		opacity: "0.8",
-		paddingTop: "1.5rem",
+		paddingTop: "1rem",
 		wordSpacing: "2.5px",
 		letterSpacing: "1.2px",
 		fontSize: "1rem",
-		fontWeight: 300
+		fontWeight: 300,
+		marginBottom: '-1.5rem'
 	}
 }
