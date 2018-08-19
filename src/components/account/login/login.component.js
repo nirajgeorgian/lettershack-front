@@ -3,9 +3,12 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
-import {
-	Form, FormGroup, Label, Input, Col, Button, Row, Container
-} from 'reactstrap'
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
 import { LOGIN_SUCCESS } from '../../../actions/actionTypes/login.actionType'
 import { loginUserDispatcher } from '../../../actions/actionCreator/accounts/login.action'
 import Auth from '../auth/auth.component'
@@ -37,7 +40,11 @@ class Login extends Component {
 		})
 	}
 
-
+	validate = () => {
+		return this.state.email &&
+					 // this.state.username &&
+					 this.state.password
+	}
 
 	onFormSubmit = async event => {
 		event.preventDefault()
@@ -57,11 +64,11 @@ class Login extends Component {
 
 	render() {
 		return (
-			<Container>
-				<Form onSubmit = { this.onFormSubmit } className="login-form">
-					<FormGroup row>
-						<Label for='email' sm={3}>Email</Label>
-						<Col sm={9}>
+			<Grid container>
+				<Grid container spacing={16}>
+					<Grid item xs={12} sm={12} md={12} lg={12}>
+						<FormControl>
+							<InputLabel htmlFor="email">Email address</InputLabel>
 							<Input
 								type='email'
 								name='email'
@@ -70,11 +77,11 @@ class Login extends Component {
 								value = { this.state.email }
 								onChange = { this.onInputChange}
 							/>
-						</Col>
-					</FormGroup>
-					<FormGroup row>
-						<Label for='password' sm={3}>Password</Label>
-						<Col sm={9}>
+						</FormControl>
+					</Grid>
+					<Grid item xs={12} sm={12} md={12} lg={12}>
+						<FormControl>
+							<InputLabel htmlFor="password">Password</InputLabel>
 							<Input
 								type='password'
 								name='password'
@@ -83,21 +90,24 @@ class Login extends Component {
 								value = { this.state.password }
 								onChange = { this.onInputChange}
 							/>
-						</Col>
-					</FormGroup>
-					<FormGroup>
-						<Col sm={{ size: 9, offset: 3}}>
-							<Button outline color='primary' type="submit">Login</Button>{''}
-						</Col>
-					</FormGroup>
-				</Form>
-				<hr></hr>
-				<Row>
-					<Col sm={{ size: 9, offset: 3 }}>
-						<Auth redirect={this.state.redirect} />
-					</Col>
-				</Row>
-			</Container>
+						</FormControl>
+					</Grid>
+					<Grid item xs={12} sm={12} md={12} lg={12}>
+						<FormControl>
+							<Button
+								disabled={!this.validate()}
+								variant="contained"
+								color="primary"
+								onClick={this.onFormSubmit}
+							>Login</Button>
+						</FormControl>
+					</Grid>
+				</Grid>
+				<hr />
+				<Grid container spacing={16}>
+					<Auth redirect={this.state.redirect} />
+				</Grid>
+			</Grid>
 		)
 	}
 }

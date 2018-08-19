@@ -4,7 +4,7 @@ export const styles = {
 		backgroundColor: 'white',
 	},
 	container: {
-		marginTop: '2rem'
+		marginTop: '2rem',
 	},
 	tabsRoot: {
     borderBottom: '1px solid #e8e8e8',
