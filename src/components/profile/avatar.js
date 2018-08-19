@@ -7,14 +7,14 @@ import Avatar from '@material-ui/core/Avatar';
 const styles = {
   row: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'right',
   },
   avatar: {
     margin: '5 0 5 5',
   },
   bigAvatar: {
-    width: 100,
-    height: 100,
+    width: 115,
+    height: 115,
   },
 };
 

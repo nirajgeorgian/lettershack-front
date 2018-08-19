@@ -1,26 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
 import Divider from '@material-ui/core/Divider';
-
 import Avatar from './avatar.js';
 
 const styles = theme => ({
@@ -31,16 +22,37 @@ const styles = theme => ({
     marginRight: theme.spacing.unit * 2,
   },
   heroUnit: {
-    backgroundColor: 'inherit',
+    backgroundColor: 'inherit'
   },
   heroContent: {
-    maxWidth: 600,
+    maxWidth: '600',
     margin: '0 auto',
     padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
   },
   heroButtons: {
     marginTop: theme.spacing.unit * 4,
   },
+  title: {
+		fontWeight: "0.7rem",
+		opacity: "0.80",
+		textTransform: "capitalize"
+  },
+  para: {
+		color: "grey",
+		opacity: "0.8",
+		wordSpacing: "2.5px",
+		letterSpacing: "1.2px",
+		fontSize: "1.2rem",
+    fontWeight: 310,
+  },
+  cardPara: {
+		color: "grey",
+		
+		wordSpacing: "2.5px",
+		letterSpacing: "1.2px",
+		fontSize: "1.2rem",
+    fontWeight: 250,
+	},
   layout: {
     width: 'auto',
     marginLeft: theme.spacing.unit * 3,
@@ -54,27 +66,30 @@ const styles = theme => ({
   },
   card: {
     display: 'flex',
+     
   },
   details: {
     display: 'flex',
     flexDirection: 'column',
   },
+  follow: {
+    margin:'1.4rem 0 0 1.5rem',
+    
+  },
+  followSpace: {
+    marginTop:'1rem',
+    wordSpacing: "2.5px",
+		letterSpacing: "1.2px",
+		fontSize: "1.2rem",
+    fontWeight: 300,
+  },
   content: {
     flex: '1 0 auto',
   },
   cover: {
-    width: 151,
-    height: 151,
-  },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
+    width:'100%',
+    height:'100%'
+
   },
   cardGrid: {
     padding: `${theme.spacing.unit * 8}px 0`,
@@ -82,6 +97,7 @@ const styles = theme => ({
   cardMedia: {
     display:'flex',
     paddingTop: '56.25%', // 16:9
+    margin:'auto',
   },
   footer: {
     backgroundColor: theme.palette.background.paper,
@@ -101,20 +117,33 @@ function Album(props) {
         {/* Hero unit */}
         <div className={classes.heroUnit}>
           <div className={classes.heroContent}>
-           <Grid container spacing={24}>
-             <Grid item xs={6} sm={3}>
+           <Grid container>
+             <Grid item sm={3} style={{paddingRight:18}}>
               <Avatar/>
              </Grid>
-             <Grid item xs={18} sm={9}>  
-                <Typography variant="display1" align="left" color="textPrimary" gutterBottom>
+             <Grid item sm={5} style={{padding:0}}>  
+                <Typography className={classes.title} variant="display1" align="left" color="textPrimary" gutterBottom>
                 FirstName LastName
                 </Typography>
-                <Typography variant="title" align="left" color="textSecondary" paragraph>
+                <Typography variant="title" className={classes.para} align="left" color="textSecondary" paragraph>
                 Something short and leading about the collection below—its contents, the creator, etc.
                 Make it short and sweet, but not too short so folks don&apos;t simply skip over it
                 entirely.
                 </Typography>
               </Grid> 
+            <Grid item sm className={classes.follow}>
+              <Typography className={classes.followSpace} align="center">
+                Following: 45
+              </Typography>
+               <Typography className={classes.followSpace} align="center">
+               Followers: 67
+               </Typography>
+               <Typography align="center">
+               <Button variant="outlined" color="primary" className={classNames(classes.button, classes.followSpace)}>
+                Follow
+                </Button>
+                </Typography>
+           </Grid>   
             </Grid> 
             <div className={classes.heroButtons}>
               <Grid container spacing={16} justify="center">
@@ -134,27 +163,35 @@ function Album(props) {
           {/* End hero unit */}
           <Grid container spacing={40}>
             {cards.map(card => (
-              <Grid item key={card} sm={6} md={4} lg={6}>
-              <div>
+              <Grid item key={card} sm={6} md={6} lg={6}>
+              <div>     
               <Card className={classes.card}>
+                <Grid container>
+                 <Grid item sm={6}> 
                 <CardMedia
                   className={classes.cover}
                   image="https://picsum.photos/200/300"
-                  title="Live from space album cover"
+                />
+                </Grid>
+                <Grid item sm={6}>
+                <CardMedia
+                title="Live from space album cover"
                 />
                 <div className={classes.details}>
                   <CardContent className={classes.content}>
-                    <Typography variant="headline">Live From Space</Typography>
-                    <Typography variant="subheading" color="textSecondary">
+                    <Typography variant="headline" className={classes.title}>Live From Space</Typography>
+                    <Typography variant="subheading" className={classes.title} color="textSecondary">
                       Mac Miller
                     </Typography>
                   </CardContent>
-                  <CardContent className={classes.content}>
-                  <Typography variant="subheading" color="textSecondary">
-                    Mac Miller hit sd sdsd sds  sds ds d d d sd ds sds d s dd 
+                  <CardContent>
+                  <Typography className={classes.cardPara}>
+                    California beaches are the best in the world, during the summer many come visit the place
                   </Typography>
                 </CardContent>
                 </div>
+                </Grid>
+              </Grid> 
               </Card>
             </div>
               </Grid>
@@ -167,7 +204,7 @@ function Album(props) {
         <Typography variant="title" align="center" gutterBottom>
           Footer
         </Typography>
-        <Typography variant="subheading" align="center" color="textSecondary" component="p">
+        <Typography align="center" color="textSecondary" component="p">
           Something here to give the footer a purpose!
         </Typography>
       </footer>
