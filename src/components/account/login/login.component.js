@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
@@ -13,6 +14,7 @@ import { LOGIN_SUCCESS } from '../../../actions/actionTypes/login.actionType'
 import { loginUserDispatcher } from '../../../actions/actionCreator/accounts/login.action'
 import Auth from '../auth/auth.component'
 import './login.css'
+import { styles } from './login.style'
 
 class Login extends Component {
 	state = {
@@ -63,51 +65,57 @@ class Login extends Component {
 	}
 
 	render() {
+		const { classes } = this.props
 		return (
-			<Grid container>
-				<Grid container spacing={16}>
-					<Grid item xs={12} sm={12} md={12} lg={12}>
-						<FormControl>
-							<InputLabel htmlFor="email">Email address</InputLabel>
-							<Input
-								type='email'
-								name='email'
-								id='email'
-								placeholder='Enter your valid email...'
-								value = { this.state.email }
-								onChange = { this.onInputChange}
-							/>
-						</FormControl>
+			<div className={classes.pageLayout}>
+				<Grid container>
+					<Grid container spacing={16}>
+						<Grid item xs={12} sm={12} md={12} lg={12}>
+							<FormControl fullWidth>
+								<InputLabel htmlFor="email">Email address</InputLabel>
+								<Input
+									fullWidth
+									type='email'
+									name='email'
+									id='email'
+									placeholder='Enter your valid email...'
+									value = { this.state.email }
+									onChange = { this.onInputChange}
+								/>
+							</FormControl>
+						</Grid>
+						<Grid item xs={12} sm={12} md={12} lg={12}>
+							<FormControl fullWidth>
+								<InputLabel htmlFor="password">Password</InputLabel>
+								<Input
+									fullWidth
+									type='password'
+									name='password'
+									id='password'
+									placeholder='Enter your password...'
+									value = { this.state.password }
+									onChange = { this.onInputChange}
+								/>
+							</FormControl>
+						</Grid>
+						<Grid item xs={12} sm={12} md={12} lg={12}>
+							<FormControl fullWidth>
+								<Button
+									fullWidth
+									disabled={!this.validate()}
+									variant="contained"
+									color="primary"
+									onClick={this.onFormSubmit}
+								>Login</Button>
+							</FormControl>
+						</Grid>
 					</Grid>
-					<Grid item xs={12} sm={12} md={12} lg={12}>
-						<FormControl>
-							<InputLabel htmlFor="password">Password</InputLabel>
-							<Input
-								type='password'
-								name='password'
-								id='password'
-								placeholder='Enter your password...'
-								value = { this.state.password }
-								onChange = { this.onInputChange}
-							/>
-						</FormControl>
-					</Grid>
-					<Grid item xs={12} sm={12} md={12} lg={12}>
-						<FormControl>
-							<Button
-								disabled={!this.validate()}
-								variant="contained"
-								color="primary"
-								onClick={this.onFormSubmit}
-							>Login</Button>
-						</FormControl>
+					<hr />
+					<Grid container spacing={16}>
+						<Auth redirect={this.state.redirect} />
 					</Grid>
 				</Grid>
-				<hr />
-				<Grid container spacing={16}>
-					<Auth redirect={this.state.redirect} />
-				</Grid>
-			</Grid>
+			</div>
 		)
 	}
 }
@@ -119,5 +127,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators({ loginUserDispatcher }, dispatch)
 }
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
+// export default withStyles(styles)(Login)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login)))
