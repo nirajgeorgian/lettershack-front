@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
-
+import BookDetails from '../components/books/BookDetails/index';
 // #ErrorBoundary so no page causing error
 import ErrorBoundary from '../config/ErrorBoundary/ErrorBoundary'
 import PrivateRoute from './protectedRoutes/protected.routes'
@@ -48,6 +48,7 @@ class Routes extends Component {
 					{/* <Route exact path='/account' component={Account} /> */}
 					<Route exact path='/account/login' component={AsyncAccountComponent} />
 					<Route exact path='/component' component={Containers} />
+					<Route exact path='/book/details' component={BookDetails} />
 					<Route exact path='/account/signup' component={AsyncAccountComponent} />
 					<PrivateRoute exact path='/books' component={AsyncBookComponent} />
 					<PrivateRoute exact path='/books/create' component={AsyncBookComponent} />

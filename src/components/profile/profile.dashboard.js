@@ -32,27 +32,24 @@ const styles = theme => ({
   heroButtons: {
     marginTop: theme.spacing.unit * 4,
   },
+  name: {
+		fontSize: "2rem",
+		opacity: "0.80",
+		textTransform: "capitalize"
+  },
   title: {
-		fontWeight: "0.7rem",
+		fontSize: "1rem",
 		opacity: "0.80",
 		textTransform: "capitalize"
   },
   para: {
 		color: "grey",
-		opacity: "0.8",
+		opacity: "1",
 		wordSpacing: "2.5px",
 		letterSpacing: "1.2px",
-		fontSize: "1.2rem",
-    fontWeight: 310,
+		fontSize: "1rem",
+    fontWeight: 330,
   },
-  cardPara: {
-		color: "grey",
-		
-		wordSpacing: "2.5px",
-		letterSpacing: "1.2px",
-		fontSize: "1.2rem",
-    fontWeight: 250,
-	},
   layout: {
     width: 'auto',
     marginLeft: theme.spacing.unit * 3,
@@ -64,10 +61,6 @@ const styles = theme => ({
       marginRight: 'auto',
     },
   },
-  card: {
-    display: 'flex',
-     
-  },
   details: {
     display: 'flex',
     flexDirection: 'column',
@@ -76,20 +69,24 @@ const styles = theme => ({
     margin:'1.4rem 0 0 1.5rem',
     
   },
-  followSpace: {
+  followStyle: {
+    color: "grey",
+		opacity: "1",
     marginTop:'1rem',
     wordSpacing: "2.5px",
 		letterSpacing: "1.2px",
-		fontSize: "1.2rem",
-    fontWeight: 300,
+    fontSize: "1rem",
+    fontWeight: 330,
   },
   content: {
     flex: '1 0 auto',
   },
-  cover: {
+  image: {
     width:'100%',
-    height:'100%'
-
+    height:'100%',
+  },
+  card: {
+    display: 'flex',
   },
   cardGrid: {
     padding: `${theme.spacing.unit * 8}px 0`,
@@ -118,12 +115,12 @@ function Album(props) {
         <div className={classes.heroUnit}>
           <div className={classes.heroContent}>
            <Grid container>
-             <Grid item sm={3} style={{paddingRight:18}}>
+             <Grid item sm={3} style={{paddingRight:23}}>
               <Avatar/>
              </Grid>
              <Grid item sm={5} style={{padding:0}}>  
-                <Typography className={classes.title} variant="display1" align="left" color="textPrimary" gutterBottom>
-                FirstName LastName
+                <Typography className={classes.name} align="left" color="textPrimary" gutterBottom>
+                FirstNam LastName
                 </Typography>
                 <Typography variant="title" className={classes.para} align="left" color="textSecondary" paragraph>
                 Something short and leading about the collection below—its contents, the creator, etc.
@@ -132,14 +129,14 @@ function Album(props) {
                 </Typography>
               </Grid> 
             <Grid item sm className={classes.follow}>
-              <Typography className={classes.followSpace} align="center">
+              <Typography className={classes.followStyle} align="center">
                 Following: 45
               </Typography>
-               <Typography className={classes.followSpace} align="center">
+               <Typography className={classes.followStyle} align="center">
                Followers: 67
                </Typography>
                <Typography align="center">
-               <Button variant="outlined" color="primary" className={classNames(classes.button, classes.followSpace)}>
+               <Button variant="outlined" color="primary" style={{marginTop:'1rem'}}>
                 Follow
                 </Button>
                 </Typography>
@@ -169,7 +166,7 @@ function Album(props) {
                 <Grid container>
                  <Grid item sm={6}> 
                 <CardMedia
-                  className={classes.cover}
+                  className={classes.image}
                   image="https://picsum.photos/200/300"
                 />
                 </Grid>
@@ -185,9 +182,10 @@ function Album(props) {
                     </Typography>
                   </CardContent>
                   <CardContent>
-                  <Typography className={classes.cardPara}>
+                  <Typography className={classes.para}>
                     California beaches are the best in the world, during the summer many come visit the place
-                  </Typography>
+                    It attracts a lot of visitors every year  
+                 </Typography>
                 </CardContent>
                 </div>
                 </Grid>

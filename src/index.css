@@ -4,3 +4,8 @@ body {
   font-family: sans-serif;
   background-color: F2F5F7;
 }
+
+#root{
+  margin: 0;
+  padding: 0;
+}
