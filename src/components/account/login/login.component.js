@@ -3,13 +3,18 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
-import {
-	Form, FormGroup, Label, Input, Col, Button, Row, Container
-} from 'reactstrap'
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
 import { LOGIN_SUCCESS } from '../../../actions/actionTypes/login.actionType'
 import { loginUserDispatcher } from '../../../actions/actionCreator/accounts/login.action'
 import Auth from '../auth/auth.component'
 import './login.css'
+import { styles } from './login.style'
 
 class Login extends Component {
 	state = {
@@ -37,7 +42,11 @@ class Login extends Component {
 		})
 	}
 
-
+	validate = () => {
+		return this.state.email &&
+					 // this.state.username &&
+					 this.state.password
+	}
 
 	onFormSubmit = async event => {
 		event.preventDefault()
@@ -56,48 +65,57 @@ class Login extends Component {
 	}
 
 	render() {
+		const { classes } = this.props
 		return (
-			<Container>
-				<Form onSubmit = { this.onFormSubmit } className="login-form">
-					<FormGroup row>
-						<Label for='email' sm={3}>Email</Label>
-						<Col sm={9}>
-							<Input
-								type='email'
-								name='email'
-								id='email'
-								placeholder='Enter your valid email...'
-								value = { this.state.email }
-								onChange = { this.onInputChange}
-							/>
-						</Col>
-					</FormGroup>
-					<FormGroup row>
-						<Label for='password' sm={3}>Password</Label>
-						<Col sm={9}>
-							<Input
-								type='password'
-								name='password'
-								id='password'
-								placeholder='Enter your password...'
-								value = { this.state.password }
-								onChange = { this.onInputChange}
-							/>
-						</Col>
-					</FormGroup>
-					<FormGroup>
-						<Col sm={{ size: 9, offset: 3}}>
-							<Button outline color='primary' type="submit">Login</Button>{''}
-						</Col>
-					</FormGroup>
-				</Form>
-				<hr></hr>
-				<Row>
-					<Col sm={{ size: 9, offset: 3 }}>
+			<div className={classes.pageLayout}>
+				<Grid container>
+					<Grid container spacing={16}>
+						<Grid item xs={12} sm={12} md={12} lg={12}>
+							<FormControl fullWidth>
+								<InputLabel htmlFor="email">Email address</InputLabel>
+								<Input
+									fullWidth
+									type='email'
+									name='email'
+									id='email'
+									placeholder='Enter your valid email...'
+									value = { this.state.email }
+									onChange = { this.onInputChange}
+								/>
+							</FormControl>
+						</Grid>
+						<Grid item xs={12} sm={12} md={12} lg={12}>
+							<FormControl fullWidth>
+								<InputLabel htmlFor="password">Password</InputLabel>
+								<Input
+									fullWidth
+									type='password'
+									name='password'
+									id='password'
+									placeholder='Enter your password...'
+									value = { this.state.password }
+									onChange = { this.onInputChange}
+								/>
+							</FormControl>
+						</Grid>
+						<Grid item xs={12} sm={12} md={12} lg={12}>
+							<FormControl fullWidth>
+								<Button
+									fullWidth
+									disabled={!this.validate()}
+									variant="contained"
+									color="primary"
+									onClick={this.onFormSubmit}
+								>Login</Button>
+							</FormControl>
+						</Grid>
+					</Grid>
+					<hr />
+					<Grid container spacing={16}>
 						<Auth redirect={this.state.redirect} />
-					</Col>
-				</Row>
-			</Container>
+					</Grid>
+				</Grid>
+			</div>
 		)
 	}
 }
@@ -109,5 +127,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators({ loginUserDispatcher }, dispatch)
 }
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
+// export default withStyles(styles)(Login)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login)))

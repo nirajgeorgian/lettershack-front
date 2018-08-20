@@ -4,6 +4,7 @@ import { Container , Row, Col} from 'reactstrap'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import GoogleLogin from 'react-google-login'
 import axios from 'axios'
+import Button from '@material-ui/core/Button';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import options from './../../../config/options'
