@@ -13,7 +13,6 @@ import FormControl from '@material-ui/core/FormControl';
 import { LOGIN_SUCCESS } from '../../../actions/actionTypes/login.actionType'
 import { loginUserDispatcher } from '../../../actions/actionCreator/accounts/login.action'
 import Auth from '../auth/auth.component'
-import './login.css'
 import { styles } from './login.style'
 
 class Login extends Component {
@@ -109,10 +108,10 @@ class Login extends Component {
 								>Login</Button>
 							</FormControl>
 						</Grid>
-					</Grid>
-					<hr />
-					<Grid container spacing={16}>
-						<Auth redirect={this.state.redirect} />
+						<hr />
+						<Grid item xs={12} sm={12} md={12} lg={12}>
+							<Auth redirect={this.state.redirect} />
+						</Grid>
 					</Grid>
 				</Grid>
 			</div>
