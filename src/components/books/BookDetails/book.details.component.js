@@ -43,7 +43,7 @@ const styles = theme => ({
     marginRight: 'auto',
     width: '50%',
   },
-  star: {
+  stars: {
         color: "#FF9700"
   },
   divider:{
@@ -79,7 +79,7 @@ const BookDetails = (props) => {
       let stars = []
 		for(let i = 0; i < 5; i++) {
 			if(i < rating) {
-				stars.push(<Star className={classes.star} key={i} />)
+				stars.push(<Star className={classes.stars} key={i} />)
 			} else {
 				stars.push(<Star key={i} />)
 			}
