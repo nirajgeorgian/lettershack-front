@@ -13,8 +13,8 @@ import Divider from '@material-ui/core/Divider';
 import Star from '@material-ui/icons/Star'
 
 const styles = theme => ({
- 
-  
+
+
   mainContent:{
    paddingBottom:40
   },
@@ -27,7 +27,7 @@ const styles = theme => ({
   },
   subtitle:{
     marginTop:6,
-    color:'#262626' 
+    color:'#262626'
   },
   details:{
     marginTop:25,
@@ -35,7 +35,7 @@ const styles = theme => ({
     lineHeight:'2',
     color:'#262626'
   },
- 
+
   image:{
   marginTop:120,
     display:'block',
@@ -74,7 +74,7 @@ const styles = theme => ({
 
 const BookDetails = (props) => {
       const {classes} = props;
-      
+
       const rating=3;
       let stars = []
 		for(let i = 0; i < 5; i++) {
@@ -83,7 +83,7 @@ const BookDetails = (props) => {
 			} else {
 				stars.push(<Star key={i} />)
 			}
-		} 
+		}
 		const starComponent = stars.map(star => {
 			return star
 		})
@@ -91,10 +91,10 @@ const BookDetails = (props) => {
             <React.Fragment>
                <CssBaseline/>
                <Grid container className={classes.mainContent}>
-                 <Grid item sm={3} className={classNames(classes.mainContentElements,classes.image)}>
+                 <Grid item xs={12} md={3} lg={3} className={classNames(classes.mainContentElements,classes.image)}>
                    <img src="https://picsum.photos/200/300"/>
                  </Grid>
-                 <Grid item sm={5} className={classes.mainContentElements}>
+                 <Grid item xs={12} md={5} lg={5}className={classes.mainContentElements}>
                      <Typography className={classes.title} align="left" variant="display1">
                        The Namesake  {starComponent}
                      </Typography>
@@ -103,17 +103,17 @@ const BookDetails = (props) => {
                      </Typography>
                      <Typography className={classes.details} align="left">
                      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                     when an unknown printer took a galley of type and scrambled it to make a type 
-                     specimen book. It has survived not only five centuries, but also the leap into 
-                     electronic typesetting, remaining essentially unchanged. It was popularised in 
+                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                     when an unknown printer took a galley of type and scrambled it to make a type
+                     specimen book. It has survived not only five centuries, but also the leap into
+                     electronic typesetting, remaining essentially unchanged. It was popularised in
                      the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
                      and more recently with desktop publishing software like Aldus PageMaker including
                      versions of Lorem Ipsum
-                   </Typography>  
+                   </Typography>
                    <Typography align="left"><a href="#">Read More</a></Typography>
                    <Divider className={classes.divider}/>
-        
+
                    <Grid container>
                      <Grid item sm>
                      <Typography style={{fontWeight:'bold'}}>Original Title</Typography>
@@ -121,8 +121,8 @@ const BookDetails = (props) => {
                      <Grid item sm>
                      <Typography>The Namesake</Typography>
                      </Grid>
-                   </Grid>  
-                
+                   </Grid>
+
                    <Grid container>
                      <Grid item sm>
                      <Typography style={{fontWeight:'bold'}}>ISBN</Typography>
@@ -130,7 +130,7 @@ const BookDetails = (props) => {
                      <Grid item sm>
                      <Typography>9999 8888888</Typography>
                      </Grid>
-                   </Grid>  
+                   </Grid>
                    <Grid container>
                      <Grid item sm>
                      <Typography style={{fontWeight:'bold'}}>Edition Language</Typography>
@@ -146,7 +146,7 @@ const BookDetails = (props) => {
                      <Grid item sm>
                      <Typography>http:www.asassdds.com</Typography>
                      </Grid>
-                   </Grid>  
+                   </Grid>
                    <Grid container>
                      <Grid item sm>
                      <Typography style={{fontWeight:'bold'}}>Characters</Typography>
@@ -161,7 +161,7 @@ const BookDetails = (props) => {
 
                    </Typography>
                  </Grid>
-                 <Grid container item sm className={classes.sidebar}>  
+                 <Grid container item xs={12} md={4} lg={4} className={classes.sidebar}>
                  <Grid item sm>
                  <div>
                  <img className={classes.sideImages} src="https://picsum.photos/200/300"/>
@@ -174,7 +174,7 @@ const BookDetails = (props) => {
                   </div>
                   </Grid>
                   <Grid item sm>
-                     <div>  
+                     <div>
                      <Typography  className={classes.sidebarTitle}>Book Name</Typography>
                      <Typography className={classes.sidebarDescription}>
                      by <span style={{fontWeight:1000}}>Author Name</span>
@@ -193,12 +193,10 @@ const BookDetails = (props) => {
                      </Typography>
                     </div>
                   </Grid>
-                </Grid>                                               
                 </Grid>
-            </React.Fragment>    
+                </Grid>
+            </React.Fragment>
        );
 }
 
 export default withStyles(styles)(BookDetails);
-
-
