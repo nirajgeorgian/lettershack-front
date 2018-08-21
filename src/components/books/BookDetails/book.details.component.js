@@ -89,7 +89,7 @@ const BookDetails = (props) => {
 		// })
        return(
             <React.Fragment>
-               <CssBaseline/>
+              
                <Grid container className={classes.mainContent}>
                  <Grid item xs={12} md={3} lg={3} className={classNames(classes.mainContentElements,classes.image)}>
                    <img src="https://picsum.photos/200/300"/>
