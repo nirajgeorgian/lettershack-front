@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import store from './store/index'
 import './index.css';
 import App from './App';
+import {JssProvider} from 'react-jss';
 // import registerServiceWorker from './registerServiceWorker'
 
 window.onload = () => {
@@ -14,7 +15,9 @@ window.onload = () => {
 		hydrate(
 			<Router>
 				<Provider store = {store}>
+				  <JssProvider>
 					<App />
+				  </JssProvider>
 				</Provider>
 			</Router>,
 			document.getElementById('root')
@@ -23,3 +26,4 @@ window.onload = () => {
 }
 
 // registerServiceWorker();
+ 

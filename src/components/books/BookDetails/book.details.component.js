@@ -75,28 +75,28 @@ const styles = theme => ({
 const BookDetails = (props) => {
       const {classes} = props;
 
-      const rating=3;
-      let stars = []
-		for(let i = 0; i < 5; i++) {
-			if(i < rating) {
-				stars.push(<Star className={classes.stars} key={i} />)
-			} else {
-				stars.push(<Star key={i} />)
-			}
-		}
-		const starComponent = stars.map(star => {
-			return star
-		})
+    //   const rating=3;
+    //   let stars = []
+		// for(let i = 0; i < 5; i++) {
+		// 	if(i < rating) {
+		// 		stars.push(<Star className={classes.stars} key={i} />)
+		// 	} else {
+		// 		stars.push(<Star key={i} />)
+		// 	}
+		// }
+		// const starComponent = stars.map(star => {
+		// 	return star
+		// })
        return(
             <React.Fragment>
-               <CssBaseline/>
+              
                <Grid container className={classes.mainContent}>
                  <Grid item xs={12} md={3} lg={3} className={classNames(classes.mainContentElements,classes.image)}>
                    <img src="https://picsum.photos/200/300"/>
                  </Grid>
                  <Grid item xs={12} md={5} lg={5}className={classes.mainContentElements}>
                      <Typography className={classes.title} align="left" variant="display1">
-                       The Namesake  {starComponent}
+                       The Namesake  
                      </Typography>
                      <Typography className={classes.subtitle} align="left" variant="subtitle">
                        By <span style={{fontWeight:1000}}>Jhumpa Lahiri</span>
