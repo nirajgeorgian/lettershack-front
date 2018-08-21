@@ -3,12 +3,14 @@ import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import AddIcon from '@material-ui/icons/Add';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { styles } from './myWorks.style'
 import ScrollableTabsButtonAuto from './tabComp'
+import WorkCard from '../userWorkCard/workCard'
 
 function TabContainer(props) {
   return (
@@ -42,7 +44,8 @@ class MyWork extends Component {
 						<Grid item xs={12} sm={6} md={6} lg={6}>
 							<Grid container spacing={16} direction="row" justify="flex-end" alignItems="center">
 								<Button variant="contained" color="primary">
-									Primary
+									<AddIcon />
+									New Story
 								</Button>
 							</Grid>
 						</Grid>
@@ -50,8 +53,8 @@ class MyWork extends Component {
 					<Grid container spacing={32}>
 						<Grid item xs={12} sm={12} md={12} lg={12}>
 							<ScrollableTabsButtonAuto
-								comp1={() => <h1>Hello World</h1>}
-								comp2={() => <h1>Hello World comp2</h1>}
+								comp1={() => <WorkCard />}
+								comp2={() => <WorkCard />}
 							/>
 						</Grid>
 					</Grid>

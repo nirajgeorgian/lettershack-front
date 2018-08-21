@@ -50,8 +50,8 @@ class ScrollableTabsButtonAuto extends React.Component {
             scrollable
             scrollButtons="auto"
           >
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
+            <Tab label="Published" />
+            <Tab label="All Stories" />
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer>{ comp1() }</TabContainer>}
