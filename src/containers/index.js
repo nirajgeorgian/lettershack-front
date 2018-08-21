@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SingleBook from './SingleBook'
 import EmptyWork from './works/emptyWork'
+import MyWork from './works/myWorks/myWorks'
 
 
 const data = {
@@ -17,7 +18,8 @@ class Containers extends Component {
 		return (
 			<div>
 				{/* <SingleBook data={data} /> */}
-				<EmptyWork />
+				{/* <EmptyWork /> */}
+				<MyWork />
 			</div>
 		)
 	}

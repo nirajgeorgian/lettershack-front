@@ -5,11 +5,13 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import GoogleLogin from 'react-google-login'
 import axios from 'axios'
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import options from './../../../config/options'
 import { socialLoginDispatcher } from '../../../actions/actionCreator/accounts/login.action'
-import './auth.css'
+import { styles } from './auth.style'
 import consts from '../../../config/const'
 
 class Auth extends Component {
@@ -34,28 +36,29 @@ class Auth extends Component {
 		}
 	}
 	render() {
+		const { classes } = this.props
 		return (
-			<Row>
-				<Col>
+			<Grid container spacing={16}>
+				<Grid item xs={12} sm={6} md={6} lg={6}>
 					<FacebookLogin
 						appId="517391568694969"
 						autoLoad={false}
 						callback={res => this.authResponse(res, 'auth/facebook')}
 						render = { renderProps => (
-							<button onClick={renderProps.onClick} className='btn btn-outline-primary'>Login with facebook</button>
+							<Button onClick={renderProps.onClick} variant="contained" color="primary">Login with facebook</Button>
 						)}
 					/>
-				</Col>
-				<Col>
+				</Grid>
+				<Grid item xs={12} sm={6} md={6} lg={6}>
 					<GoogleLogin
-						className="btn btn-outline-danger"
+						className={ classes.googlelogin }
 						clientId="931728103562-kivlmr53i8ckklnb9lj2nrtthv38qk9a.apps.googleusercontent.com"
 						buttonText="Login with google"
 						onSuccess={res => this.authResponse(res, 'auth/google')}
 						onFailure={this.googleResponse}
 					/>
-				</Col>
-			</Row>
+				</Grid>
+			</Grid>
 		)
 	}
 }
@@ -64,4 +67,4 @@ const mapDispathToProps = dispatch => {
 	return bindActionCreators({ socialLoginDispatcher }, dispatch)
 }
 
-export default withRouter(connect(null, mapDispathToProps)(Auth))
+export default withRouter(connect(null, mapDispathToProps)(withStyles(styles)(Auth)))
