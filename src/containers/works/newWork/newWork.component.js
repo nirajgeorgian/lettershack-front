@@ -5,12 +5,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
-import { withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme =>({
-     
-  
-})
 
 
 const NewWork = (props) =>{
@@ -29,4 +25,4 @@ const NewWork = (props) =>{
     );
 } 
 
-export default withStyles(styles)(NewWork);
+export default NewWork;
