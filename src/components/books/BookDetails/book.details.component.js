@@ -89,12 +89,12 @@ const BookDetails = (props) => {
 		// })
        return(
             <React.Fragment>
-              
-               <Grid container className={classes.mainContent}>
-                 <Grid item xs={12} md={3} lg={3} className={classNames(classes.mainContentElements,classes.image)}>
+              <div  className={classes.mainContent}>
+               <Grid container>
+                 <Grid item xs={12} md={3} lg={3} sm className={classNames(classes.mainContentElements,classes.image)}>
                    <img src="https://picsum.photos/200/300"/>
                  </Grid>
-                 <Grid item xs={12} md={5} lg={5}className={classes.mainContentElements}>
+                 <Grid item xs={12} md={5} lg={5} sm className={classes.mainContentElements}>
                      <Typography className={classes.title} align="left" variant="display1">
                        The Namesake  
                      </Typography>
@@ -161,7 +161,7 @@ const BookDetails = (props) => {
 
                    </Typography>
                  </Grid>
-                 <Grid container item xs={12} md={4} lg={4} className={classes.sidebar}>
+                 <Grid container item xs={12} md={4} lg={4} sm className={classes.sidebar}>
                  <Grid item sm>
                  <div>
                  <img className={classes.sideImages} src="https://picsum.photos/200/300"/>
@@ -195,6 +195,7 @@ const BookDetails = (props) => {
                   </Grid>
                 </Grid>
                 </Grid>
+               </div> 
             </React.Fragment>
        );
 }
