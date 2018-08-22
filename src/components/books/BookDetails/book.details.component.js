@@ -111,7 +111,7 @@ const BookDetails = (props) => {
                      and more recently with desktop publishing software like Aldus PageMaker including
                      versions of Lorem Ipsum
                    </Typography>
-                   <Typography align="left"><a href="#">Read More</a></Typography>
+                   <Typography align="left"><a>Read More</a></Typography>
                    <Divider className={classes.divider}/>
 
                    <Grid container>
