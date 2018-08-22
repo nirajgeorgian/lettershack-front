@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SingleBook from './SingleBook'
 import EmptyWork from './works/emptyWork'
 import MyWork from './works/myWorks/myWorks'
+import WorkCard from './works/userWorkCard/workCard'
 
 
 const data = {
@@ -20,6 +21,7 @@ class Containers extends Component {
 				{/* <SingleBook data={data} /> */}
 				{/* <EmptyWork /> */}
 				<MyWork />
+				{/* <WorkCard /> */}
 			</div>
 		)
 	}
