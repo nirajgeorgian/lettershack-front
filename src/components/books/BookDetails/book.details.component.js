@@ -13,7 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import Star from '@material-ui/icons/Star'
 
 const styles = theme => ({
-
+ 
 
   mainContent:{
    paddingBottom:40
@@ -72,7 +72,7 @@ const styles = theme => ({
 });
 
 
-const BookDetails = (props) => {
+function BookDetails(props){
       const {classes} = props;
 
     //   const rating=3;

@@ -7,9 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
-
-
-const NewWork = (props) =>{
+function NewWork(props){
     const {classes} = props;
     return(
         <React.Fragment>

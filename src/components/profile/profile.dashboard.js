@@ -12,7 +12,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
-import Avatar from './avatar.js';
+import Avatar from './avatar.js'; 
  
 const styles = theme => ({
   appBar: {
