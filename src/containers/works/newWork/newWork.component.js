@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,8 +7,9 @@ import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
-function NewWork(props){
-    const {classes} = props;
+ class NewWork extends Component{
+    render(){
+      const {classes} = this.props;
     return(
         <React.Fragment>
           <Grid container>
@@ -20,7 +21,7 @@ function NewWork(props){
             </Grid>  
           </Grid>
          </React.Fragment>
-    );
+    )
 } 
-
-export default NewWork;
+}
+export default NewWork;  

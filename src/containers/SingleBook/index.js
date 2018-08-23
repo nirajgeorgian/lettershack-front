@@ -14,7 +14,7 @@ import Star from '@material-ui/icons/Star'
 // import classes from './index.css'
 import { styles } from './styles'
 
-class SingleBookContainer extends Component {
+class SingleBookContainer extends Component { 
 	render() {
 		const { data, classes } = this.props
 		// responsible for rendering star rating
