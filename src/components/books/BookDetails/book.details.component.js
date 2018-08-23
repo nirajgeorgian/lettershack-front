@@ -72,7 +72,7 @@ const styles = theme => ({
 });
 
 
-function BookDetails(props){
+function BookDetails(props){ 
       const {classes} = props;
 
     //   const rating=3;

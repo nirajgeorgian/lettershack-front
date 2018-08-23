@@ -21,7 +21,7 @@ import { data } from './data'
 import remy from '../../img/remy.jpg'
 
 class HomeComponent extends Component {
-	state = {
+	state = { 
 		value: 0
 	}
 
