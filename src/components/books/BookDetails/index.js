@@ -11,7 +11,7 @@ class BookDetails extends Component {
       </JssProvider>
     );
   }
-}
+} 
 
 export default BookDetails;
   

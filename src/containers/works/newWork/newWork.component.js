@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import NewWork from './newWork';
+import NewWorkDummy from './newWork';
 import { JssProvider } from 'react-jss';
-class NewWorkPage extends Component {
+class NewWorkDummyPage extends Component {
     render(){
     return(
         <JssProvider classNamePrefix="newWork-">
-         <NewWork/>
+         <NewWorkDummy/>
         </JssProvider>
     )
 }
 }
-export default NewWorkPage; 
+export default NewWorkDummyPage; 
