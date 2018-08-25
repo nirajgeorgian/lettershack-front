@@ -10,6 +10,9 @@ import App from './App';
 import {JssProvider} from 'react-jss';
 import { create } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
+import '../node_modules/draft-js/dist/Draft.css'
+
+import TextEditor from './containers/Editor/Editor'
 // import registerServiceWorker from './registerServiceWorker'
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
@@ -29,4 +32,3 @@ window.onload = () => {
 }
 
 // registerServiceWorker();
- 

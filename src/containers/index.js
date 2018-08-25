@@ -3,6 +3,7 @@ import SingleBook from './SingleBook'
 import EmptyWork from './works/emptyWork'
 import MyWork from './works/myWorks/myWorks'
 import WorkCard from './works/userWorkCard/workCard'
+import TextEditor from './Editor/Editor'
 
 
 const data = {
@@ -20,8 +21,9 @@ class Containers extends Component {
 			<div>
 				{/* <SingleBook data={data} /> */}
 				{/* <EmptyWork /> */}
-				<MyWork />
+				{/* <MyWork /> */}
 				{/* <WorkCard /> */}
+				<TextEditor />
 			</div>
 		)
 	}
