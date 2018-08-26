@@ -1,49 +1,54 @@
 export const styles = {
 	card: {
 		overflow: "visible",
-		marginTop: "2rem"
+		marginTop: "3rem"
 	},
 	display: {
 	  overflow: "visible"
 	},
 	cover: {
-		width: "100%",
-		height: "250px",
+		width: "90%",
+		height: "210px",
 		border: "0.5px solid lightgrey",
 		borderRadius: "5px",
 		boxShadow: "2px 2px 5px lightgrey",
 		marginTop: "-2rem",
-		marginLeft: "0.5rem"
+		marginLeft: "0.8rem"
 	},
 	content: {
-		marginTop: "-2.2rem"
+		//marginTop: "-2.2rem"
 	},
 	contentitem: {
 		marginTop: '-1rem'
 	},
 	title: {
-		fontWeight: "0.7rem",
-		opacity: "0.75",
-		textTransform: "capitalize"
+		fontWeight: 400,
+		//opacity: "0.9",
+		textTransform: "capitalize",
+		fontSize: "1.2rem",
+		paddingTop: '0.7rem'
 	},
 	ratings: {
-		marginTop: "0.7rem"
+		marginTop: "0.7rem",
 	},
 	star: {
-		color: "#FF9700"
+		color: "#FF9700",
+		fontSize: '12px'
 	},
 	votes: {
-		paddingLeft: "1rem",
+		paddingLeft: "0.7rem",
 		fontWeight: 400,
-		paddingTop: "1rem"
+		paddingTop: "1rem",
+		fontSize:'12px'
 	},
 	para: {
 		color: "grey",
-		opacity: "0.8",
+		opacity: "1.0",
 		paddingTop: "1rem",
-		wordSpacing: "2.5px",
-		letterSpacing: "1.2px",
-		fontSize: "1rem",
+		paddingBottom: '1rem',
+		wordSpacing: "1.5px",
+		//letterSpacing: "0.7px",
+		fontSize: "0.85rem",
 		fontWeight: 300,
 		marginBottom: '-1.5rem'
 	}
