@@ -12,9 +12,17 @@ import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Star from '@material-ui/icons/Star'
 
-const styles = theme => ({ 
+const styles = theme => ({  
  
-
+  heroUnit: {
+    backgroundColor: 'inherit'
+  },
+  heroContent: {
+    maxWidth: '600',
+    margin: '0 auto',
+    padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
+  },
+ 
   mainContent:{
    paddingBottom:40
   },
@@ -75,21 +83,24 @@ const styles = theme => ({
 function BookDetails(props){ 
       const {classes} = props;
 
-    //   const rating=3;
-    //   let stars = []
-		// for(let i = 0; i < 5; i++) {
-		// 	if(i < rating) {
-		// 		stars.push(<Star className={classes.stars} key={i} />)
-		// 	} else {
-		// 		stars.push(<Star key={i} />)
-		// 	}
-		// }
-		// const starComponent = stars.map(star => {
-		// 	return star
-		// })
+      const rating=3;
+      let stars = []
+		for(let i = 0; i < 5; i++) {
+			if(i < rating) {
+				stars.push(<Star className={classes.stars} key={i} />)
+			} else {
+				stars.push(<Star key={i} />)
+			}
+		}
+		const starComponent = stars.map(star => {
+			return star
+		})
        return(
             <React.Fragment>
-              <div  className={classes.mainContent}>
+              <CssBaseline />
+               <main>
+              <div  className={classes.heroUnit}>
+                <div className={classes.heroContent}>
                <Grid container>
                  <Grid item xs={12} md={3} lg={3} sm className={classNames(classes.mainContentElements,classes.image)}>
                    <img src="https://picsum.photos/200/300"/>
@@ -113,13 +124,15 @@ function BookDetails(props){
                    </Typography>
                    <Typography align="left"><a>Read More</a></Typography>
                    <Divider className={classes.divider}/>
-
+                 
                    <Grid container>
                      <Grid item sm>
                      <Typography style={{fontWeight:'bold'}}>Original Title</Typography>
                      </Grid>
                      <Grid item sm>
-                     <Typography>The Namesake</Typography>
+                     <Typography>The Namesake
+                       {starComponent}
+                     </Typography>
                      </Grid>
                    </Grid>
 
@@ -196,6 +209,8 @@ function BookDetails(props){
                 </Grid>
                 </Grid>
                </div> 
+              </div> 
+             </main> 
             </React.Fragment>
        );
 }
