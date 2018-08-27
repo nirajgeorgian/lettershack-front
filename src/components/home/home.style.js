@@ -1,21 +1,32 @@
 export const styles = {
 	root: {
 		flexGrow: 1,
-		backgroundColor: 'white',
+
 	},
 	container: {
-		marginTop: '2rem',
+		paddingTop: '2rem',
+		paddingLeft: '3rem',
+		paddingRight:'3rem',
+position: 'absolute',
+    width: '100%',
+    left: 0,
+
+    background: "#f2f4f7"
+	},
+	subtitle:{
+		opacity:'0.85',
+		marginBottom: '1rem'
 	},
 	tabsRoot: {
     borderBottom: '1px solid #e8e8e8',
   },
   tabsIndicator: {
-    backgroundColor: '#1890ff',
+    backgroundColor: '#aaf3f5',
   },
   tabRoot: {
     textTransform: 'initial',
     minWidth: 72,
-    fontWeight: 300,
+    fontWeight: 500,
     marginRight: "1rem",
     fontFamily: [
       '-apple-system',
@@ -35,7 +46,7 @@ export const styles = {
     },
     '&$tabSelected': {
       color: '#1890ff',
-      fontWeight: 400,
+      fontWeight: 500,
     },
     '&:focus': {
       color: '#40a9ff',
@@ -53,6 +64,8 @@ export const styles = {
 	},
 	iconTitle: {
 		display: 'inline-block',
-		paddingTop: '0.7rem'
+		paddingTop: '0.7rem',
+		fontSize: '14px',
+		opacity: 0.8
 	}
 }

@@ -12,7 +12,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Star from '@material-ui/icons/Star'
 
-const styles = theme => ({
+const styles = theme => ({ 
  
 
   mainContent:{

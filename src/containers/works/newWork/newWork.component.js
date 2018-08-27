@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import NewWorkDummy from './newWork';
 import { JssProvider } from 'react-jss';
 class NewWorkDummyPage extends Component {

@@ -4,6 +4,7 @@ const fullPage = (html, preloadedState) => {
 		<!doctype html>
 		<html>
 			<head>
+				<meta charset="utf-8" />
 				<title>lettershack</title>
 			</head>
 			<body>

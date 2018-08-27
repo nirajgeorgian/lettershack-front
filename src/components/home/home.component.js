@@ -19,9 +19,14 @@ import SingleBookComponent from '../../containers/SingleBook/index'
 import { styles } from './home.style'
 import { data } from './data'
 import remy from '../../img/remy.jpg'
+import img1 from '../../img/img1.jpeg'
+import img2 from '../../img/img2.jpeg'
+import img3 from '../../img/img3.jpg'
+import img4 from '../../img/img4.jpg'
+
 
 class HomeComponent extends Component {
-	state = { 
+	state = {
 		value: 0
 	}
 
@@ -38,7 +43,7 @@ class HomeComponent extends Component {
 				<div className={classes.container}>
 					<Grid container spacing={16}>
 						<Grid item xs={12} md={3} lg={3}>
-							<h4>Author of the week</h4>
+							<h5 className={classes.subtitle}>Author of the week</h5>
 							<div>
 								<Avatar alt='Remy Sharp' src={remy} className={classes.avatar} />
 								<p className={classes.iconTitle}>Remy Sharp</p>
@@ -75,7 +80,7 @@ class HomeComponent extends Component {
 						<Grid item xs={12} md={9} lg={9}>
 							<Grid container spacing={32}>
 								<Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-									<h4>Popular By Genre</h4>
+									<h5 className={classes.subtitle}>Popular By Genre</h5>
 								</Grid>
 								<Grid item xs={12} sm={8} md={8} lg={8} xl={8}>
 									<div className={classes.tabs}>
@@ -120,18 +125,18 @@ class HomeComponent extends Component {
 							</Grid>
 							<Grid container spacing={32}>
 								<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
-									<SingleBookComponent data={data} />
+									<SingleBookComponent data={data} img={img3}/>
 								</Grid>
 								<Grid item xs={12} md={6} lg={6} sm={6} xl={6}>
-									<SingleBookComponent data={data} />
+									<SingleBookComponent data={data} img={img4}/>
 								</Grid>
 							</Grid>
 							<Grid container spacing={32}>
 								<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
-									<SingleBookComponent data={data} />
+									<SingleBookComponent data={data} img={img1} />
 								</Grid>
 								<Grid item xs={12} md={6} lg={6} sm={6} xl={6}>
-									<SingleBookComponent data={data} />
+									<SingleBookComponent data={data} img={img2}/>
 								</Grid>
 							</Grid>
 							<Grid container spacing={32}>
