@@ -13,7 +13,7 @@ import User from '../components/profile/userpage.component'
 import Notes from '../components/books/index'
 import Homepage from '../components/home/home.component'
 import Containers from '../containers/index'
-import NewWorkDummyPage from '../containers/works/newWork/newWork.component';
+import NewWorkPage from '../containers/works/newWork/newWork.component';
 // import Books from '../components/books/index'
 
 const AsyncAccountComponent = Loadable({
@@ -49,7 +49,7 @@ class Routes extends Component {
 					{/* <Route exact path='/account' component={Account} /> */}
 					<Route exact path='/account/login' component={AsyncAccountComponent} />
 					<Route exact path='/component' component={Containers} />
-					<Route exact path='/work/new' component={NewWorkDummyPage} />
+					<Route exact path='/work/new' component={NewWorkPage} />
 					<Route exact path='/book/details' component={BookDetails} />
 					<Route exact path='/account/signup' component={AsyncAccountComponent} />
 					<PrivateRoute exact path='/books' component={AsyncBookComponent} />

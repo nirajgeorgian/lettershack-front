@@ -14,14 +14,13 @@ import '../node_modules/draft-js/dist/Draft.css'
 
 import TextEditor from './containers/Editor/Editor'
 // import registerServiceWorker from './registerServiceWorker'
-const generateClassName = createGenerateClassName();
-const jss = create(jssPreset());
+
 window.onload = () => {
 	Loadable.preloadReady().then(() => {
 		hydrate(
 			<Router>
 				<Provider store = {store}>
-				  <JssProvider  jss={jss} generateClassName={generateClassName}>
+				  <JssProvider>
 					<App />
 				  </JssProvider>
 				</Provider>
