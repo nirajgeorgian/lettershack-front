@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
 import BookDetails from '../components/books/BookDetails/index';
-// #ErrorBoundary so no page causing error
+// #ErrorBoundary so no page causing error 
 import ErrorBoundary from '../config/ErrorBoundary/ErrorBoundary'
 import PrivateRoute from './protectedRoutes/protected.routes'
 

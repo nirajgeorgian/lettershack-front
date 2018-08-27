@@ -13,7 +13,7 @@ import Tab from '@material-ui/core/Tab';
 import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Avatar from './avatar.js'; 
- 
+  
 const styles = theme => ({
   appBar: {
     position: 'relative',
@@ -106,7 +106,7 @@ const cards = [1, 2, 3, 4, 5, 6];
 
 function Album(props) {
   const { classes } = props; 
-
+ 
   return (
     <React.Fragment>
       <CssBaseline />
