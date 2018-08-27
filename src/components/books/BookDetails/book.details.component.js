@@ -107,7 +107,7 @@ function BookDetails(props){
                  </Grid>
                  <Grid item xs={12} md={5} lg={5} sm className={classes.mainContentElements}>
                      <Typography className={classes.title} align="left" variant="display1">
-                       The Namesake  
+                       The Namesake  {starComponent}
                      </Typography>
                      <Typography className={classes.subtitle} align="left" variant="subtitle">
                        By <span style={{fontWeight:1000}}>Jhumpa Lahiri</span>
@@ -131,7 +131,6 @@ function BookDetails(props){
                      </Grid>
                      <Grid item sm>
                      <Typography>The Namesake
-                       {starComponent}
                      </Typography>
                      </Grid>
                    </Grid>
