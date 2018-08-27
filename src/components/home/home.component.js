@@ -125,7 +125,9 @@ class HomeComponent extends Component {
 							</Grid>
 							<Grid container spacing={32}>
 								<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
+								   <Link to="/book/details">
 									<SingleBookComponent data={data} img={img3}/>
+								   </Link>	 
 								</Grid>
 								<Grid item xs={12} md={6} lg={6} sm={6} xl={6}>
 									<SingleBookComponent data={data} img={img4}/>

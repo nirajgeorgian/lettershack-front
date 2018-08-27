@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Star from '@material-ui/icons/Star'
-
+import { Link } from 'react-router-dom';
 const styles = theme => ({  
  
   heroUnit: {
