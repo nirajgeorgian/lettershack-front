@@ -38,8 +38,6 @@ const styles = theme => ({
 	  marginLeft: 30,
 	  marginRight: 10
 	  },
-   
-	 
 });
 
 

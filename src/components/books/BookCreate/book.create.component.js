@@ -62,7 +62,7 @@ class BookCreate extends Component {
               id='tags'
               placeholder='Enter your tags ..'
               value = { this.state.tags }
-              onChange = { this.onInputChange}
+              onChange = { this.onInputChange} 
             />
           </Col>
         </FormGroup>
