@@ -58,5 +58,8 @@
     "hooks": {
       "pre-commit": "npm run build && git add ."
     }
+  },
+  "engines": {
+    "node": "10.9.0"
   }
 }
