@@ -2,9 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
-import {
-	Form, FormGroup, Label, Input, Col, Button, FormFeedback
-} from 'reactstrap'
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import { styles } from './style.layout'
+import FormControl from '@material-ui/core/FormControl';
 import {
 	CHECK_USERNAME_SUCCESS, CHECK_USERNAME_FAILURE, POST_USERNAME_FAILURE
 } from '../../../actions/actionTypes/username.availability.actionType'
@@ -32,7 +37,7 @@ class Signup extends Component {
 	isValid = () => {
 		return this.state.email &&
 					 this.state.password &&
-					 this.state.proceed &&
+					 // this.state.proceed &&
 					 this.state.username
 	}
 
@@ -80,57 +85,91 @@ class Signup extends Component {
 		})
 	}
 
+	onLogin = () => {
+		this.props.history.push("/account/login")
+	}
+
 	render() {
+		const { classes } = this.props
 		return (
-			<Form onSubmit = { this.onFormSubmit } onFocus = { this.clearMessage }>
-				<FormGroup row>
-					<Label for='username' sm={3}>Username</Label>
-					<Col sm={9}>
-						<Input
-							type='text'
-							name='username'
-							id='username'
-							placeholder='Enter one username...'
-							value = { this.state.username }
-							onChange = { this.onInputChange }
-							onBlur = { this.onUsernameChange }
-							valid = { this.state.userMessage === '' ? false : true }
-							invalid = { this.state.userErrMessage === '' ? false : true }
-						/>
-					<FormFeedback valid>{ this.state.userMessage }</FormFeedback>
-					<FormFeedback>{ this.state.userErrMessage }</FormFeedback>
-					</Col>
-				</FormGroup>
-				<FormGroup row>
-					<Label for='email' sm={3}>Email</Label>
-					<Col sm={9}>
-						<Input
-							type='email'
-							name='email'
-							id='email'
-							placeholder='Enter your valid email...'
-							value = { this.state.email }
-							onChange = { this.onInputChange}
-							invalid = { this.state.errorMessage === '' ? false : true }
-						/>
-						<FormFeedback>Oh noes! { this.state.errorMessage }</FormFeedback>
-					</Col>
-				</FormGroup>
-				<FormGroup row>
-					<Label for='password' sm={3}>Password</Label>
-					<Col sm={9}>
-						<Input
-							type='password'
-							name='password'
-							id='password'
-							placeholder='Enter your password...'
-							value = { this.state.password }
-							onChange = { this.onInputChange}
-						/>
-					</Col>
-					<Button outline color='primary' type="submit" disabled={!this.isValid()}>Signup</Button>{''}
-				</FormGroup>
-			</Form>
+			<div className={classes.pageLayout}>
+				<form onSubmit = { this.onFormSubmit } onFocus = { this.clearMessage }>
+					<Grid container>
+						<Grid container spacing={16}>
+							<Grid item xs={12} sm={12} md={12} lg={12}>
+								<FormControl fullWidth>
+									<InputLabel htmlFor="email">Email address</InputLabel>
+									<Input
+										fullWidth
+										type='email'
+										name='email'
+										id='email'
+										placeholder='Enter your valid email...'
+										value = { this.state.email }
+										onChange = { this.onInputChange}
+										onBlur = { this.onUsernameChange }
+										valid = { this.state.userMessage === '' ? false : true }
+										invalid = { this.state.userErrMessage === '' ? false : true }
+									/>
+								</FormControl>
+							</Grid>
+							<Grid item xs={12} sm={12} md={12} lg={12}>
+								<FormControl fullWidth>
+									<InputLabel htmlFor="username">Username</InputLabel>
+									<Input
+										fullWidth
+										type='text'
+										name='username'
+										id='username'
+										placeholder='Enter one username...'
+										value = { this.state.username }
+										onChange = { this.onInputChange }
+										onBlur = { this.onUsernameChange }
+										valid = { this.state.userMessage === '' ? false : true }
+										invalid = { this.state.userErrMessage === '' ? false : true }
+									/>
+								</FormControl>
+							</Grid>
+							<Grid item xs={12} sm={12} md={12} lg={12}>
+								<FormControl fullWidth>
+									<InputLabel htmlFor="password">Password</InputLabel>
+									<Input
+										fullWidth
+										type='password'
+										name='password'
+										id='password'
+										placeholder='Enter your password...'
+										value = { this.state.password }
+										onChange = { this.onInputChange}
+									/>
+								</FormControl>
+							</Grid>
+							<Grid item xs={12} sm={12} md={12} lg={12}>
+								<FormControl fullWidth>
+									<Button
+										fullWidth
+										variant="contained"
+										color="primary"
+										disabled={!this.isValid()}
+										onClick={this.onFormSubmit}
+									>Signup</Button>
+								</FormControl>
+							</Grid>
+							<hr />
+							<Grid item xs={12} sm={12} md={12} lg={12}>
+								<center><h2>OR</h2></center>
+								<Button
+									fullWidth
+									variant="contained"
+									color="primary"
+									onClick={this.onLogin}
+								>Login</Button>
+								{/* <Auth redirect={this.state.redirect} /> */}
+							</Grid>
+						</Grid>
+					</Grid>
+			</form>
+			</div>
 		)
 	}
 }
@@ -145,4 +184,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Signup))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Signup)))
