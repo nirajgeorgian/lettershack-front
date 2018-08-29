@@ -27,7 +27,7 @@ editor :{
  cursor: 'text',
  padding: '16px',
  borderRadius: '2px',
- marginTop: '2em',
+ marginTop: '',
  //box-shadow: inset 0px 1px 8px -3px #ABABAB,
  background:'#fefefe'
 }

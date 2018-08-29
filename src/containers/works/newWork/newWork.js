@@ -14,6 +14,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
 import placeholder from '../../../img/Placeholder.jpg';
 import styles from './styles';
 
@@ -63,17 +64,27 @@ class NewWork extends Component{
       const tag = e.target.value;
        if(tag.indexOf(' ') >= 0){
         this.setState(() => {
-         let tagItem = '';
         return {
-          tagItem,
            tags: [...this.state.tags, tag.trim()]
         };
         });
         console.log(this.state.tags);
       }
+      if(tag.indexOf(' ') >= 0){
+        this.setState(()=>({tagItem:''}));
+      }else{
       this.setState(()=>({tagItem:tag}));
       console.log(tag);
+      }
     }
+    handleDelete = data => () => {
+        this.setState(state => {
+        const tags = [...state.tags];
+        const tagToDelete = tags.indexOf(data);
+        tags.splice(tagToDelete, 1);
+        return { tags };
+      });
+    };
 
     render(){
       const {classes} = this.props;
@@ -161,6 +172,15 @@ class NewWork extends Component{
                    className: classes.FormLabel,
                    }}
                  />
+                  {this.state.tags.map(data => {                   
+                   return (
+                  <Chip
+                  key={data.indexOf()}
+                  label={data}
+                  onDelete={this.handleDelete(data)}
+                  className={classes.chip}
+                  />);
+                  })}
 
                   <Divider className={classes.divider}/>
                   <FormControl>

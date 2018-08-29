@@ -54,6 +54,9 @@ export default theme => ({
     },
     button: {
       margin: theme.spacing.unit,
-    }
+    },
+    chip: {
+      margin: theme.spacing.unit / 2,
+    },
   });
    
