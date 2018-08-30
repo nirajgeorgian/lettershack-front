@@ -39,10 +39,11 @@ class NewWork extends Component{
       if(!this.state.description || !this.state.title){
         this.setState(()=>({error:'please provide title and description'}));
     }else{
-       
+      	this.props.onStateChange(this.state)
+				this.props.onFormSubmit()
      }
     }
-   
+
     onTitleChange = (e) => {
       const title = e.target.value;
       this.setState(()=>({title}));
@@ -54,15 +55,15 @@ class NewWork extends Component{
 
     onGenreChange = (e) =>{
       const genre = e.target.value;
-      this.setState(()=>({genre})); 
-    }  
+      this.setState(()=>({genre}));
+    }
 
     onLanguageChange = (e) =>{
       const language = e.target.value;
-      this.setState(()=>({language})); 
+      this.setState(()=>({language}));
     }
 
-    onTagsChange = (e) =>{     
+    onTagsChange = (e) =>{
       const tag = e.target.value;
        if(tag.indexOf(' ') >= 0){
         this.setState(() => {
@@ -102,12 +103,12 @@ class NewWork extends Component{
             <div className={classes.heroUnit}>
               <div className={classes.heroContent}>
                  <Grid container>
-                 <Grid item sm={3}>            
+                 <Grid item sm={3}>
                  <label for="file-input">
                  <img className={classes.image} src={placeholder}/>
                 </label>
               <input className={classes.imageUpload} id="file-input" type="file"/>
-            </Grid> 
+            </Grid>
             <Grid item sm={9}>
               <Card>
                 <CardContent>
@@ -117,12 +118,12 @@ class NewWork extends Component{
                   <TextField
                    className={classes.text}
                    fullWidth={true}
-                   autoFocus={true}                   
+                   autoFocus={true}
                    defaultValue="My first Story"
                    value={this.state.title}
                    onChange={this.onTitleChange}
                    label="Title"
-                   id="bootstrap-input" 
+                   id="bootstrap-input"
                    InputProps={{
                    disableUnderline: true,
                    classes: {
@@ -136,12 +137,12 @@ class NewWork extends Component{
                    }}
                  />
                  <Typography></Typography>
-                 
+
                   <TextField
                   className={classes.text}
                   fullWidth={true}
                   label="Description"
-                  id="bootstrap-input" 
+                  id="bootstrap-input"
                   InputProps={{
                   disableUnderline: true,
                   classes: {
@@ -161,12 +162,12 @@ class NewWork extends Component{
                   />
                   <TextField
                    className={classes.text}
-                   fullWidth={false}         
+                   fullWidth={false}
                    onChange={this.onTagsChange}
                    label="Tags"
                    value={this.state.tagItem}
                    placeholder="Seperate tags with a space"
-                   id="bootstrap-input" 
+                   id="bootstrap-input"
                    InputProps={{
                    disableUnderline: true,
                    classes: {
@@ -179,7 +180,7 @@ class NewWork extends Component{
                    className: classes.FormLabel,
                    }}
                  />
-                  {this.state.tags.map(data => {                   
+                  {this.state.tags.map(data => {
                    return (
                   <Chip
                   key={data.indexOf()}
@@ -197,6 +198,7 @@ class NewWork extends Component{
                    id="bootstrap-input"
                    displayEmpty={true} 
                    value={0}
+
                   input={<Input disableUnderline={true} name="genre" id="add-genre" />}
                  >
                   
@@ -210,15 +212,15 @@ class NewWork extends Component{
                    );
                  })}
                  </Select>
-                </FormControl> 
-                <Divider className={classes.divider}/>               
+                </FormControl>
+                <Divider className={classes.divider}/>
                  <Grid Container className={classes.root}>
                    <Grid item sm={6}>
                    <FormControl>
                   <InputLabel className={classes.FormLabel} htmlFor="add-language">Language</InputLabel>
                    <Select
-                   className={classes.text}                 
-                   id="bootstrap-input" 
+                   className={classes.text}
+                   id="bootstrap-input"
                    value={10}
                   input={<Input disableUnderline={true} name="language" id="add-language" />}
                  >
@@ -229,14 +231,14 @@ class NewWork extends Component{
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
                  </Select>
-                </FormControl> 
+                </FormControl>
                    </Grid>
                    <Grid item sm={6}>
                    <FormControl>
                   <InputLabel className={classes.FormLabel} htmlFor="add-copyright">Copyright</InputLabel>
                    <Select
-                   className={classes.text}                 
-                   id="bootstrap-input" 
+                   className={classes.text}
+                   id="bootstrap-input"
                    value={10}
                   input={<Input disableUnderline={true} name="copyright" id="add-copyright" />}
                  >
@@ -247,7 +249,7 @@ class NewWork extends Component{
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
                  </Select>
-                </FormControl> 
+                </FormControl>
                    </Grid>
                  </Grid>  
                  <Button 
@@ -269,19 +271,19 @@ class NewWork extends Component{
                  </form>
                 </CardContent>
               </Card>
-             </Grid> 
-            </Grid>        
+             </Grid>
+            </Grid>
              </div>
-           </div>  
-           </main> 
+           </div>
+           </main>
          </React.Fragment>
     );
-} 
+}
 }
 
 NewWork.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRouter((withStyles(styles)(NewWork)));  
 
+export default withRouter((withStyles(styles)(NewWork)));  
