@@ -20,10 +20,10 @@ class Containers extends Component {
 		return (
 			<div>
 				{/* <SingleBook data={data} /> */}
-				{/* <EmptyWork /> */}
+				{ <EmptyWork /> }
 				{/* <MyWork /> */}
-				{/* <WorkCard /> */}
-				<TextEditor />
+		      {/* <WorkCard />*/ }
+				{/* <TextEditor /> */}
 			</div>
 		)
 	}

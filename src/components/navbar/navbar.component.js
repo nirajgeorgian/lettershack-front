@@ -94,7 +94,7 @@ class NavbarComponent extends React.Component {
 								this.props.isAuthenticated ? (
 									<React.Fragment>
 										
-											<Link to="/books/create" className={classes.navLink}>Write</Link>
+											<Link to="/component" className={classes.navLink}>Write</Link>
 										
 										
 											<Link to="/notes/create" className={classes.navLink}>Notes</Link>

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { Container } from 'reactstrap'
 
 import BookDetails from './BookDetails/book.details.component'
-import BookCreate from './BookCreate/book.create.component'
+import BookCreate from './BookCreate/newWork.component'
 import AllBook from './AllBook/book.all.component'
 
 class Books extends Component {
