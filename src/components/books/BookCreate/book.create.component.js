@@ -25,7 +25,7 @@ class BookCreate extends Component {
 	}
 
   onFormSubmit = async event => {
-    event.preventDefault()
+    // event.preventDefault()
 		const tagList = []
 		for(let i of this.state.tags.split(",")) {
 			tagList.push(i.trim())
@@ -62,7 +62,7 @@ class BookCreate extends Component {
               id='tags'
               placeholder='Enter your tags ..'
               value = { this.state.tags }
-              onChange = { this.onInputChange} 
+              onChange = { this.onInputChange}
             />
           </Col>
         </FormGroup>
