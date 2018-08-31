@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import {connect} from 'react-redux'; 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -26,10 +27,12 @@ import img4 from '../../img/img4.jpg'
 
 
 class HomeComponent extends Component {
-	state = {
+	constructor(props){
+		super(props);
+	this.state = {
 		value: 0
 	}
-
+}
 	handleChange = (event, value) => {
 		this.setState({ value })
 	}
@@ -37,6 +40,7 @@ class HomeComponent extends Component {
 	render() {
 		const { value } = this.state
 		const { classes } = this.props
+   
 		return (
 			<React.Fragment>
 	      <CssBaseline />
@@ -124,38 +128,21 @@ class HomeComponent extends Component {
 								</Grid>
 							</Grid>
 							<Grid container spacing={32}>
+
+							{
+								this.props.books ? (
+								this.props.books.map(book=> {
+								return(
 								<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
 								   <Link to="/book/details">
-									<SingleBookComponent data={data} img={img3}/>
+									<SingleBookComponent data={book} img={img3}/>
 								   </Link>	 
 								</Grid>
-								<Grid item xs={12} md={6} lg={6} sm={6} xl={6}>
-									<SingleBookComponent data={data} img={img4}/>
-								</Grid>
-							</Grid>
-							<Grid container spacing={32}>
-								<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
-									<SingleBookComponent data={data} img={img1} />
-								</Grid>
-								<Grid item xs={12} md={6} lg={6} sm={6} xl={6}>
-									<SingleBookComponent data={data} img={img2}/>
-								</Grid>
-							</Grid>
-							<Grid container spacing={32}>
-								<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
-									<SingleBookComponent data={data} />
-								</Grid>
-								<Grid item xs={12} md={6} lg={6} sm={6} xl={6}>
-									<SingleBookComponent data={data} />
-								</Grid>
-							</Grid>
-							<Grid container spacing={32}>
-								<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
-									<SingleBookComponent data={data} />
-								</Grid>
-								<Grid item xs={12} md={6} lg={6} sm={6} xl={6}>
-									<SingleBookComponent data={data} />
-								</Grid>
+								);
+							})
+								):(<div/>)
+						}
+						
 							</Grid>
 						</Grid>
 			    </Grid>
@@ -165,4 +152,11 @@ class HomeComponent extends Component {
 	}
 }
 
-export default withStyles(styles)(HomeComponent)
+
+const mapStateToProps = (state) =>{
+	return {
+			books: state.book.book
+	};
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(HomeComponent))

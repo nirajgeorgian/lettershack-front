@@ -20,7 +20,7 @@ import { styles } from './styles'
 class SingleBookContainer extends Component {
 	render() {
 		const { data, classes } = this.props
-		// responsible for rendering star rating
+		// responsible for rendering star rating 
 		let stars = []
 		for(let i = 0; i < 5; i++) {
 			if(i < data.rating) {
@@ -64,7 +64,7 @@ class SingleBookContainer extends Component {
 									<span>{starComponent}</span> <span className={classes.votes}>{data.votes} vosdfters</span>
 								</Typography>
 								<Typography paragraph className={classes.para}>
-									{data.details}
+									{data.description}
 								</Typography>
 							</CardContent>
 						</Grid>

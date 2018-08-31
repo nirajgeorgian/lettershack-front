@@ -1,7 +1,7 @@
 import axios from 'axios'
 import config from '../../../config/const'
 import {
-  BOOK_CREATE_FETCH, BOOK_CREATE_COMPLETE, BOOK_CREATE_ERROR
+  BOOK_CREATE_FETCH, BOOK_CREATE_COMPLETE, SET_BOOKS, BOOK_CREATE_ERROR
 } from '../../actionTypes/book.actionTypes'
 import options from '../../../config/options'
 
@@ -38,4 +38,23 @@ export const createBookDispatcher = data => {
       .catch(err => dispatch(BookCreateError(err)))
   }
 }
- 
+
+const setBooks = books => ({
+  type: SET_BOOKS,
+  data: books
+})
+
+export const setStartBooks = () =>{
+  return dispatch => {
+    return axios(`${config.API_URL}/books`,  options('GET'))
+       .then(res=>{
+        if(res.data.status) {
+          const books = res.data.books;
+          console.log(books);
+        dispatch(setBooks(books));
+        }else {
+           console.log('error');
+        }
+       })            
+      };
+  };

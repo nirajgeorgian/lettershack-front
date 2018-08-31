@@ -1,5 +1,5 @@
 import {
-  BOOK_CREATE_ERROR, BOOK_CREATE_FETCH, BOOK_CREATE_COMPLETE
+  BOOK_CREATE_ERROR, BOOK_CREATE_FETCH, BOOK_CREATE_COMPLETE, SET_BOOKS
 } from '../../actions/actionTypes/book.actionTypes'
 
 const booksReducer = (state = {}, action) => {
@@ -21,6 +21,10 @@ const booksReducer = (state = {}, action) => {
         data: {},
         book: action.data
       })
+    case SET_BOOKS:
+      return({
+        book: action.data
+      })  
     default:
       return state
   }
