@@ -58,7 +58,7 @@ class SingleBookContainer extends Component {
 								 {data.title}
 							</Typography>
 								<Typography variant="subheading" color="textSecondary">
-									by {data.author}
+									by {this.props.author}
 								</Typography>
 								<Typography variant="subheading" color="textSecondary" className={classes.ratings}>
 									<span>{starComponent}</span> <span className={classes.votes}>{data.votes} vosdfters</span>

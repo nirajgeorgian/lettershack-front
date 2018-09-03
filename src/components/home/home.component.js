@@ -36,7 +36,10 @@ class HomeComponent extends Component {
 	handleChange = (event, value) => {
 		this.setState({ value })
 	}
-
+   getAuthor(id){
+		 const user = this.props.users.data.filter((user)=> user._id == id);
+		 return user[0].username;
+	 }
 	render() {
 		console.log(this.props);
 		const { value } = this.state;
@@ -114,12 +117,14 @@ class HomeComponent extends Component {
 							<Grid container spacing={32}>
 
 							{
-								this.props.books ? (
+								this.props.books && this.props.users ? (
 								this.props.books.map(book=> {
+								const author = this.getAuthor(book.author);
+								console.log(author);
 								return(
 								<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
 								   <Link to="/book/details">
-									<SingleBookComponent data={book} img={img3}/>
+									<SingleBookComponent data={book} author={author} img={img3}/>
 								   </Link>	 
 								</Grid>
 								);

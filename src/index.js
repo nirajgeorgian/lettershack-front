@@ -45,10 +45,9 @@ const renderApp = () =>{
 
 store.dispatch(setStartBooks())
 .then(()=>{
-	store.dispatch(setStartUsers())
-	.then(()=>{
 	  renderApp();
-	}) 
 });
+store.dispatch(setStartUsers())
+
 
 // registerServiceWorker();

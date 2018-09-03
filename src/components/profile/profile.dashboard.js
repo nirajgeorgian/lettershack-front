@@ -28,7 +28,7 @@ class Profile extends React.Component {
   state={
     user:{}
   }
-  componentDidMount(){
+ async componentDidMount(){
     const getUser = () =>{
       console.log('component did mount');
       
@@ -44,14 +44,15 @@ class Profile extends React.Component {
           }
            })            
     }
-   getUser();
+   await getUser();
   }
   render(){
     console.log(this.props.match.params.username);
     const { classes } = this.props;  
     const { name } = this.state;
-    const user = this.state.user.user;
-    //console.log(user.name);
+    if(this.state.user.user){
+    console.log(this.state.user.user._id);
+    }
   return (
     <React.Fragment>
       <CssBaseline />
@@ -60,19 +61,19 @@ class Profile extends React.Component {
         <div className={classes.heroUnit}>
           <div className={classes.heroContent}>
            <Grid container>
-             <Grid item sm={3} style={{paddingRight:23}}>
+             <Grid item sm={3} style={{paddingRight:0}}>
               <Avatar/>
              </Grid>
              <Grid item sm={5} style={{padding:0}}>  
                
-                 {/* {
-                   this.state.user?(
+                 {
+                   this.state.user.user?(
                 <Typography className={classes.name} align="left" color="textPrimary" gutterBottom>
                  {this.state.user.user.name}
                 </Typography>
                    ):
                    ('')
-                 } */}
+                 }
                 <Typography variant="title" className={classes.para} align="left" color="textSecondary" paragraph>
                 Something short and leading about the collection below—its contents, the creator, etc.
                 Make it short and sweet, but not too short so folks don&apos;t simply skip over it
