@@ -3,7 +3,7 @@ import {
 	CHECK_USERNAME_SUCCESS,
 	CHECK_USERNAME_FAILURE,
 	POST_USERNAME_FAILURE,
-	POST_USERNAME_SUCCESS
+	POST_USERNAME_SUCCESS,
 } from '../../actionTypes/username.availability.actionType'
 import axios from 'axios'
 import consts from '../../../config/const'
@@ -67,3 +67,4 @@ export const postUsername = data => {
 			.catch(err => dispatch(postUsernameFailure('error setting username')))
 	}
 }
+ 

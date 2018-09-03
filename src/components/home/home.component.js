@@ -38,48 +38,32 @@ class HomeComponent extends Component {
 	}
 
 	render() {
-		const { value } = this.state
-		const { classes } = this.props
-   
-		return (
+		console.log(this.props);
+		const { value } = this.state;
+		const { classes } = this.props;
+		
+		return ( 
 			<React.Fragment>
 	      <CssBaseline />
 				<div className={classes.container}>
 					<Grid container spacing={16}>
 						<Grid item xs={12} md={3} lg={3}>
 							<h5 className={classes.subtitle}>Author of the week</h5>
+							{this.props.users?
+							(this.props.users.data.map(user=>{
+							return(		
+							<Link to={`/account/profile/${user.username}`}>	
 							<div>
-								<Avatar alt='Remy Sharp' src={remy} className={classes.avatar} />
-								<p className={classes.iconTitle}>Remy Sharp</p>
+								<Avatar alt={user.name} src={remy} className={classes.avatar} />
+								<p className={classes.iconTitle}>{user.name}</p>
 							</div>
-							<div>
-								<Avatar alt='Remy Sharp' src={remy} className={classes.avatar} />
-								<p className={classes.iconTitle}>Gold Star</p>
-							</div>
-							<div>
-								<Avatar alt='Remy Sharp' src={remy} className={classes.avatar} />
-								<p className={classes.iconTitle}>Jimmy Wade</p>
-							</div>
-							<div>
-								<Avatar alt='Remy Sharp' src={remy} className={classes.avatar} />
-								<p className={classes.iconTitle}>Batman</p>
-							</div>
-							<div>
-								<Avatar alt='Remy Sharp' src={remy} className={classes.avatar} />
-								<p className={classes.iconTitle}>Superman</p>
-							</div>
-							<div>
-								<Avatar alt='Remy Sharp' src={remy} className={classes.avatar} />
-								<p className={classes.iconTitle}>Wonder Women</p>
-							</div>
-							<div>
-								<Avatar alt='Remy Sharp' src={remy} className={classes.avatar} />
-								<p className={classes.iconTitle}>Thor</p>
-							</div>
-							<div>
-								<Avatar alt='Remy Sharp' src={remy} className={classes.avatar} />
-								<p className={classes.iconTitle}>Hulk</p>
-							</div>
+						 </Link>
+							);}
+							)
+							):(
+								<div/>
+							)
+							}
 						</Grid>
 						<Grid item xs={12} md={9} lg={9}>
 							<Grid container spacing={32}>
@@ -155,8 +139,9 @@ class HomeComponent extends Component {
 
 const mapStateToProps = (state) =>{
 	return {
-			books: state.book.book
-	};
+			books: state.book.book,
+			users: state.user.data
+	}
 };
 
 export default connect(mapStateToProps)(withStyles(styles)(HomeComponent))

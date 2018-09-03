@@ -10,6 +10,7 @@ import './index.css';
 import App from './App';
 import LoadingPage from './components/LoadingPage'
 import { setStartBooks } from './actions/actionCreator/books/books.action';
+import { setStartUsers } from './actions/actionCreator/users/setUsers';
 import '../node_modules/draft-js/dist/Draft.css'
 
 import TextEditor from './containers/Editor/Editor'
@@ -44,6 +45,10 @@ const renderApp = () =>{
 
 store.dispatch(setStartBooks())
 .then(()=>{
-	renderApp();
+	store.dispatch(setStartUsers())
+	.then(()=>{
+	  renderApp();
+	}) 
 });
+
 // registerServiceWorker();

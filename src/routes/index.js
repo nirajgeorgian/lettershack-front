@@ -57,7 +57,7 @@ class Routes extends Component {
 					<PrivateRoute exact path="/book/:id" component={AsyncBookComponent} />
 					<PrivateRoute exact path='/notes' component={AsyncNoteComponent} />
 					<PrivateRoute exact path='/notes/create' component={AsyncNoteComponent} />
-					<PrivateRoute exact path='/account/profile' component={Profile} />
+					<PrivateRoute exact path='/account/profile/:username' component={Profile} />
 					<PrivateRoute exact path='/user/:id' component={User} />
 					<Route path='*' component={ErrorPage} />
 				</Switch>

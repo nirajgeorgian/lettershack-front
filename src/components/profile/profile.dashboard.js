@@ -12,101 +12,46 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
+import { connect } from 'react-redux';
 import Avatar from './avatar.js'; 
-  
-const styles = theme => ({
-  appBar: {
-    position: 'relative',
-  },
-  icon: {
-    marginRight: theme.spacing.unit * 2,
-  },
-  heroUnit: {
-    backgroundColor: 'inherit'
-  },
-  heroContent: {
-    maxWidth: '600',
-    margin: '0 auto',
-    padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
-  },
-  heroButtons: {
-    marginTop: theme.spacing.unit * 4,
-  },
-  name: {
-		fontSize: "2rem",
-		opacity: "0.80",
-		textTransform: "capitalize"
-  },
-  title: {
-		fontSize: "1rem",
-		opacity: "0.80",
-		textTransform: "capitalize"
-  },
-  para: {
-		color: "grey",
-		opacity: "1",
-		wordSpacing: "2.5px",
-		letterSpacing: "1.2px",
-		fontSize: "1rem",
-    fontWeight: 330,
-  },
-  layout: {
-    width: 'auto',
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    
-    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
-      width: 1100,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
-  },
-  details: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  follow: {
-    margin:'1.4rem 0 0 1.5rem',
-    
-  },
-  followStyle: {
-    color: "grey",
-		opacity: "1",
-    marginTop:'1rem',
-    wordSpacing: "2.5px",
-		letterSpacing: "1.2px",
-    fontSize: "1rem",
-    fontWeight: 330,
-  },
-  content: {
-    flex: '1 0 auto',
-  },
-  image: {
-    width:'100%',
-    height:'100%',
-  },
-  card: {
-    display: 'flex',
-  },
-  cardGrid: {
-    padding: `${theme.spacing.unit * 8}px 0`,
-  },
-  cardMedia: {
-    display:'flex',
-    paddingTop: '56.25%', // 16:9
-    margin:'auto',
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing.unit * 6,
-  },
-});
-
+import axios from 'axios'
+import config from '../../config/const'
+import options from '../../config/options'
+import { styles } from './styles'; 
 const cards = [1, 2, 3, 4, 5, 6];
 
-function Album(props) {
-  const { classes } = props; 
- 
+class Profile extends React.Component {
+  constructor(props){
+    super(props);
+  }
+   
+  state={
+    user:{}
+  }
+  componentDidMount(){
+    const getUser = () =>{
+      console.log('component did mount');
+      
+        return axios(`${config.API_URL}/users/${this.props.match.params.username}`,  options('GET'))
+           .then(res=>{
+            console.log(res);
+          if(res.data.status) {
+            const user = res.data;
+            console.log(user);
+          this.setState(()=>({user}))
+          }else {
+             console.log('error');
+          }
+           })            
+    }
+   getUser();
+  }
+  render(){
+    console.log(this.props.match.params.username);
+    const { classes } = this.props;  
+    const { name } = this.state;
+    const user = this.state.user.user;
+    //console.log(user.name);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -119,9 +64,15 @@ function Album(props) {
               <Avatar/>
              </Grid>
              <Grid item sm={5} style={{padding:0}}>  
+               
+                 {/* {
+                   this.state.user?(
                 <Typography className={classes.name} align="left" color="textPrimary" gutterBottom>
-                FirstNam LastName
+                 {this.state.user.user.name}
                 </Typography>
+                   ):
+                   ('')
+                 } */}
                 <Typography variant="title" className={classes.para} align="left" color="textSecondary" paragraph>
                 Something short and leading about the collection below—its contents, the creator, etc.
                 Make it short and sweet, but not too short so folks don&apos;t simply skip over it
@@ -209,10 +160,12 @@ function Album(props) {
       {/* End footer */}
     </React.Fragment>
   );
+ }
 }
 
-Album.propTypes = {
+Profile.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Album);
+
+export default connect()(withStyles(styles)(Profile));
