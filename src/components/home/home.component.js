@@ -30,11 +30,23 @@ class HomeComponent extends Component {
 	constructor(props){
 		super(props);
 	this.state = {
-		value: 0
+		value: 0,
+		genre:undefined
+		
 	}
 }
 	handleChange = (event, value) => {
 		this.setState({ value })
+	}
+	handleFiction =() =>{
+	  if (this.props.books){
+		 const fiction = this.props.books.filter((book)=> book.genre == 'fiction');
+		  console.log(fiction);
+        this.setState(()=>({genre:fiction}))
+	  }
+	}
+	handleAllGenres = ()=> {
+		this.setState(()=>({genre:undefined}))
 	}
    getAuthor(id){
 		 const user = this.props.users.data.filter((user)=> user._id == id);
@@ -45,6 +57,13 @@ class HomeComponent extends Component {
 		const { value } = this.state;
 		const { classes } = this.props;
 		
+		let books;
+
+		if(this.state.genre){
+			books = this.state.genre;
+		}else{
+			books = this.props.books;
+		}
 		return ( 
 			<React.Fragment>
 	      <CssBaseline />
@@ -82,7 +101,8 @@ class HomeComponent extends Component {
 						        >
 						          <Tab
 						            disableRipple
-						            classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+									classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+									onClick={this.handleAllGenres}
 						            label="All Genres"
 						          />
 						          <Tab
@@ -98,7 +118,8 @@ class HomeComponent extends Component {
 											<Tab
 						            disableRipple
 						            classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-						            label="Fiction"
+									label="Fiction"
+									onClick={this.handleFiction}
 						          />
 											<Tab
 						            disableRipple
@@ -118,15 +139,18 @@ class HomeComponent extends Component {
 
 							{
 								this.props.books && this.props.users ? (
-								this.props.books.map(book=> {
+								books.map(book=> {
 								const author = this.getAuthor(book.author);
 								console.log(author);
-								return(
+							return(
+								
 								<Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
-								   <Link to="/book/details">
+								   <Link to={`/book/details/${book._id}`}
+								   >
 									<SingleBookComponent data={book} author={author} img={img3}/>
 								   </Link>	 
 								</Grid>
+								
 								);
 							})
 								):(<div/>)
@@ -144,7 +168,7 @@ class HomeComponent extends Component {
 
 const mapStateToProps = (state) =>{
 	return {
-			books: state.book.book,
+			books: state.book.books,
 			users: state.user.data
 	}
 };

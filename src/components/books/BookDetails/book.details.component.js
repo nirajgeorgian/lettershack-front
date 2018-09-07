@@ -12,77 +12,20 @@ import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Star from '@material-ui/icons/Star'
 import { Link } from 'react-router-dom';
-const styles = theme => ({  
- 
-  heroUnit: {
-    backgroundColor: 'inherit'
-  },
-  heroContent: {
-    maxWidth: '600',
-    margin: '0 auto',
-    padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
-  },
- 
-  mainContent:{
-   paddingBottom:40
-  },
-
-  mainContentElements:{
-     marginTop:100
-  },
-  title:{
-    color:'#262626'
-  },
-  subtitle:{
-    marginTop:6,
-    color:'#262626'
-  },
-  details:{
-    marginTop:25,
-    fontSize:'.9rem',
-    lineHeight:'2',
-    color:'#262626'
-  },
-
-  image:{
-  marginTop:120,
-    display:'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: '50%',
-  },
-  stars: {
-        color: "#FF9700"
-  },
-  divider:{
-    marginTop:30,
-    marginBottom:30
-  },
-  sidebar:{
-    marginTop:-40
-  },
-  sidebarTitle:{
-    marginTop:80
-  },
-  sidebarDescription:{
-    marginTop:20
-  },
-  sideContent:{
-     paddingTop:60
-  },
-  sideImages:{
-    marginTop:70,
-    width:'85px',
-    height:'120px',
-     marginLeft: 80,
-     marginRight: 'auto',
-  }
-});
-
-
-function BookDetails(props){ 
-      const {classes} = props;
-
+import { connect } from 'react-redux'
+import { styles } from './styles'; 
+import { getOneBook } from '../../../actions/actionCreator/books/books.action';
+class BookDetails extends React.Component{
+  constructor(props){ 
+    super(props);
+   }
+   render(){
+     if(this.props.book){
+      const book = this.props.book
+     }
+      console.log(this.props);
+      
+      const { classes } = this.props;
       const rating=3;
       let stars = []
 		for(let i = 0; i < 5; i++) {
@@ -94,7 +37,7 @@ function BookDetails(props){
 		}
 		const starComponent = stars.map(star => {
 			return star
-		})
+    })
        return(
             <React.Fragment>
               <CssBaseline />
@@ -107,9 +50,9 @@ function BookDetails(props){
                  </Grid>
                  <Grid item xs={12} md={5} lg={5} sm className={classes.mainContentElements}>
                      <Typography className={classes.title} align="left" variant="display1">
-                       The Namesake  {starComponent}
+                     {this.props.book?(this.props.book[0].title):('')} {starComponent}
                      </Typography>
-                     <Typography className={classes.subtitle} align="left" variant="subtitle">
+                     <Typography className={classes.subtitle} align="left">
                        By <span style={{fontWeight:1000}}>Jhumpa Lahiri</span>
                      </Typography>
                      <Typography className={classes.details} align="left">
@@ -130,7 +73,8 @@ function BookDetails(props){
                      <Typography style={{fontWeight:'bold'}}>Original Title</Typography>
                      </Grid>
                      <Grid item sm>
-                     <Typography>The Namesake
+                     <Typography>
+                     {this.props.book?(this.props.book[0].title):('')}
                      </Typography>
                      </Grid>
                    </Grid>
@@ -187,7 +131,9 @@ function BookDetails(props){
                   </Grid>
                   <Grid item sm>
                      <div>
-                     <Typography  className={classes.sidebarTitle}>Book Name</Typography>
+                     <Typography  className={classes.sidebarTitle}>
+                      Book Name
+                     </Typography>
                      <Typography className={classes.sidebarDescription}>
                      by <span style={{fontWeight:1000}}>Author Name</span>
                      </Typography>
@@ -212,6 +158,24 @@ function BookDetails(props){
              </main> 
             </React.Fragment>
        );
-}
-
-export default withStyles(styles)(BookDetails);
+     }
+  }
+    const mapStateToProps = (state,props) =>{   
+      const book = state.book.books;
+    if(book){
+     const oneBook = book.filter((book)=>{
+       return book._id == props.match.params.id
+    })
+      if(oneBook){ 
+      return{
+        book: oneBook
+       }
+     }else {
+      getOneBook(props.match.params.id);
+   }
+   }else {
+         getOneBook(props.match.params.id);
+      }
+    
+    };
+export default connect(mapStateToProps)(withStyles(styles)(BookDetails))

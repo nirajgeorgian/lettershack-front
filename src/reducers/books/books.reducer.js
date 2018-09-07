@@ -23,7 +23,8 @@ const booksReducer = (state = {}, action) => {
       })
     case SET_BOOKS:
       return({
-        book: action.data
+        ...state,
+        books: action.data
       })  
     default:
       return state

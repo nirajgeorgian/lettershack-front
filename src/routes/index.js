@@ -14,6 +14,7 @@ import Notes from '../components/books/index'
 import Homepage from '../components/home/home.component'
 import Containers from '../containers/index'
 import Editor from '../containers/Editor/Editor'
+import MyWorksOne from '../containers/works/myWorksOne/myWorksOne';
 // import Books from '../components/books/index'
 
 const AsyncAccountComponent = Loadable({
@@ -50,10 +51,11 @@ class Routes extends Component {
 					<Route exact path='/account/login' component={AsyncAccountComponent} />
 					<Route exact path='/component' component={Containers} />
 					<Route exact path='/editor' component={Editor}/>
-					<Route exact path='/book/details' component={BookDetails} />
+					<Route exact path='/book/details/:id' component={BookDetails} />
 					<Route exact path='/account/signup' component={AsyncAccountComponent} />
 					<PrivateRoute exact path='/books' component={AsyncBookComponent} />
 					<PrivateRoute exact path='/books/create' component={AsyncBookComponent} />
+					<PrivateRoute exact path='/myworks' component={MyWorksOne} />
 					<PrivateRoute exact path="/book/:id" component={AsyncBookComponent} />
 					<PrivateRoute exact path='/notes' component={AsyncNoteComponent} />
 					<PrivateRoute exact path='/notes/create' component={AsyncNoteComponent} />

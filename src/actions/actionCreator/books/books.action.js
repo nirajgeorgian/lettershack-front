@@ -58,3 +58,18 @@ export const setStartBooks = () =>{
        })            
       };
   };
+
+  export const getOneBook = (id) =>{
+    return dispatch => {
+      return axios(`${config.API_URL}/books/?id=${id}`,  options('GET'))
+         .then(res=>{
+          if(res.data.status) {
+            const book = res.data.book;
+            console.log(book);
+          dispatch(setBooks(book));
+          }else {
+             console.log('error');
+          }
+         })            
+        };
+  };
