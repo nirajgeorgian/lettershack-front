@@ -12,21 +12,39 @@ import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Star from '@material-ui/icons/Star'
 import { Link } from 'react-router-dom';
+import IconButton from '@material-ui/core/IconButton';
 import { connect } from 'react-redux'
 import { styles } from './styles'; 
 import { getOneBook } from '../../../actions/actionCreator/books/books.action';
 class BookDetails extends React.Component{
   constructor(props){ 
     super(props);
+    this.state={
+      chapter:undefined
+    }
    }
+   getAuthor(id){
+    const user = this.props.users.data.filter((user)=> user._id == id);
+    return user[0].username;
+    console.log(user);
+  }
+  handleChapter=(chapter)=>{
+   this.setState(()=>({chapter}))
+  }
+  componentDidUpdate(){
+    if(this.props.book){
+      if(this.props.book[0].chapters){
+        const chapter = this.props.book[0].chapters[0];
+        if(!this.state.chapter){
+        this.setState(()=>({chapter}));
+        }
+      }
+    }
+  }
    render(){
-     if(this.props.book){
-      const book = this.props.book
-     }
-      console.log(this.props);
-      
+      console.log(this.props);   
       const { classes } = this.props;
-      const rating=3;
+          const rating=3;
       let stars = []
 		for(let i = 0; i < 5; i++) {
 			if(i < rating) {
@@ -38,6 +56,10 @@ class BookDetails extends React.Component{
 		const starComponent = stars.map(star => {
 			return star
     })
+    let author;
+    if(this.props.book && this.props.users){
+      author = this.getAuthor(this.props.book[0].author);
+    }
        return(
             <React.Fragment>
               <CssBaseline />
@@ -45,7 +67,8 @@ class BookDetails extends React.Component{
               <div  className={classes.heroUnit}>
                 <div className={classes.heroContent}>
                <Grid container>
-                 <Grid item xs={12} md={3} lg={3} sm className={classNames(classes.mainContentElements,classes.image)}>
+                 <Grid item xs={12} md={3} lg={3} sm 
+                 className={classNames(classes.mainContentElements,classes.image)}>
                    <img src="https://picsum.photos/200/300"/>
                  </Grid>
                  <Grid item xs={12} md={5} lg={5} sm className={classes.mainContentElements}>
@@ -53,18 +76,19 @@ class BookDetails extends React.Component{
                      {this.props.book?(this.props.book[0].title):('')} {starComponent}
                      </Typography>
                      <Typography className={classes.subtitle} align="left">
-                       By <span style={{fontWeight:1000}}>Jhumpa Lahiri</span>
+                       By <span style={{fontWeight:1000}}>{author}</span>
+                     </Typography>
+                     <Typography className={classes.subtitle} align="left">
+                       Genre <span style={{fontWeight:1000}}>
+                       {this.props.book?(this.props.book[0].genre):('')}
+                       </span>
+                     </Typography>
+                     <Typography className={classes.title} align="left" variant="title">
+                      {this.state.chapter?(this.state.chapter.title):('')}
                      </Typography>
                      <Typography className={classes.details} align="left">
-                     Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                     when an unknown printer took a galley of type and scrambled it to make a type
-                     specimen book. It has survived not only five centuries, but also the leap into
-                     electronic typesetting, remaining essentially unchanged. It was popularised in
-                     the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                     and more recently with desktop publishing software like Aldus PageMaker including
-                     versions of Lorem Ipsum
-                   </Typography>
+                     {this.state.chapter?(this.state.chapter.content):('')}
+                     </Typography>
                    <Typography align="left"><a>Read More</a></Typography>
                    <Divider className={classes.divider}/>
                  
@@ -112,46 +136,30 @@ class BookDetails extends React.Component{
                      </Grid>
                    </Grid>
                    <Divider className={classes.divider}/>
-                   <Typography>
+                   <Typography align="center">
                      Comments
-
                    </Typography>
                  </Grid>
-                 <Grid container item xs={12} md={4} lg={4} sm className={classes.sidebar}>
-                 <Grid item sm>
-                 <div>
-                 <img className={classes.sideImages} src="https://picsum.photos/200/300"/>
-                 </div>
-                 <div>
-                 <img className={classes.sideImages} src="https://picsum.photos/200/300"/>
+                 <Grid item sm={3} className={classes.mainContentElements}>
+                 <div className={classes.sideBar}>
+                 <Typography>
+                    Table of contents
+                 </Typography>
+                 {this.props.book?(this.props.book[0].chapters.map((chapter)=>{                   
+                   return(
+                   <div>
+                  <Button
+                  onClick={()=>{this.handleChapter(chapter)}}
+                  >
+                    {chapter.title}
+                  </Button>
                   </div>
-                  <div>
-                 <img className={classes.sideImages} src="https://picsum.photos/200/300"/>
-                  </div>
+                   ); 
+                 })       
+                ):('')}
+                                   
+                    </div>            
                   </Grid>
-                  <Grid item sm>
-                     <div>
-                     <Typography  className={classes.sidebarTitle}>
-                      Book Name
-                     </Typography>
-                     <Typography className={classes.sidebarDescription}>
-                     by <span style={{fontWeight:1000}}>Author Name</span>
-                     </Typography>
-                     </div>
-                     <div className={classes.sideContent}>
-                     <Typography className={classes.sidebarTitle} >Book Name</Typography>
-                     <Typography className={classes.sidebarDescription}>
-                     by <span style={{fontWeight:1000}}>Author Name</span>
-                     </Typography>
-                    </div>
-                    <div className={classes.sideContent}>
-                     <Typography className={classes.sidebarTitle} >Book Name</Typography>
-                     <Typography className={classes.sidebarDescription}>
-                     by <span style={{fontWeight:1000}}>Author Name</span>
-                     </Typography>
-                    </div>
-                  </Grid>
-                </Grid>
                 </Grid>
                </div> 
               </div> 
@@ -168,7 +176,8 @@ class BookDetails extends React.Component{
     })
       if(oneBook){ 
       return{
-        book: oneBook
+        book: oneBook,
+        users: state.user.data
        }
      }else {
       getOneBook(props.match.params.id);

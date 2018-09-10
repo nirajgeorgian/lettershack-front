@@ -45,7 +45,7 @@ export const styles = theme => ({
       marginBottom:30
     },
     sidebar:{
-      marginTop:-40
+     paddingLeft:30
     },
     sidebarTitle:{
       marginTop:80
