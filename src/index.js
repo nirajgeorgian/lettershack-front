@@ -42,12 +42,14 @@ const renderApp = () =>{
   }
 };
 
+	
 
 store.dispatch(setStartBooks())
 .then(()=>{
-	  renderApp();
-});
 store.dispatch(setStartUsers())
+})
+.then(()=>{
+	renderApp();	  
+ });
 
-
-// registerServiceWorker();
+ 

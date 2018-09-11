@@ -14,9 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import { connect } from 'react-redux';
 import Avatar from './avatar.js'; 
-import axios from 'axios'
-import config from '../../config/const'
-import options from '../../config/options'
+import { setStartUsers } from '../../actions/actionCreator/users/setUsers';
 import { styles } from './styles'; 
 const cards = [1, 2, 3, 4, 5, 6];
 
@@ -25,34 +23,8 @@ class Profile extends React.Component {
     super(props);
   }
    
-  state={
-    user:{}
-  }
- async componentDidMount(){
-    const getUser = () =>{
-      console.log('component did mount');
-      
-        return axios(`${config.API_URL}/users/${this.props.match.params.username}`,  options('GET'))
-           .then(res=>{
-            console.log(res);
-          if(res.data.status) {
-            const user = res.data;
-            console.log(user);
-          this.setState(()=>({user}))
-          }else {
-             console.log('error');
-          }
-           })            
-    }
-   await getUser();
-  }
   render(){
-    console.log(this.props.match.params.username);
     const { classes } = this.props;  
-    const { name } = this.state;
-    if(this.state.user.user){
-    console.log(this.state.user.user._id);
-    }
   return (
     <React.Fragment>
       <CssBaseline />
@@ -67,18 +39,21 @@ class Profile extends React.Component {
              <Grid item sm={5} style={{padding:0}}>  
                
                  {
-                   this.state.user.user?(
+                   this.props.user?(
                 <Typography className={classes.name} align="left" color="textPrimary" gutterBottom>
-                 {this.state.user.user.name}
+                 {this.props.user[0].name}
                 </Typography>
                    ):
                    ('')
                  }
+                {
+                  this.props.user?( 
                 <Typography variant="title" className={classes.para} align="left" color="textSecondary" paragraph>
-                Something short and leading about the collection below—its contents, the creator, etc.
-                Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-                entirely.
+                {this.props.user[0].bio}
                 </Typography>
+                  ):
+                  ('')
+                }
               </Grid> 
             <Grid item sm className={classes.follow}>
               <Typography className={classes.followStyle} align="center">
@@ -168,5 +143,23 @@ Profile.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+  const mapStateToProps = (state,props) =>{   
+        const users = state.user.data;
+        console.log(users);
+      if(users){
+        const oneUser = users.data.filter((user)=>{
+          return user._id == props.match.params.id
+       })
+         if(oneUser){ 
+         return{
+           user: oneUser,
+        }
+      }else {
+        setStartUsers();
+      }
+      }else {
+          setStartUsers();
+        }
 
-export default connect()(withStyles(styles)(Profile));
+      };
+export default connect(mapStateToProps)(withStyles(styles)(Profile))

@@ -74,7 +74,7 @@ class HomeComponent extends Component {
 							{this.props.users?
 							(this.props.users.data.map(user=>{
 							return(		
-							<Link to={`/account/profile/${user.username}`}>	
+							<Link to={`/account/profile/${user._id}`}>	
 							<div>
 								<Avatar alt={user.name} src={remy} className={classes.avatar} />
 								<p className={classes.iconTitle}>{user.name}</p>

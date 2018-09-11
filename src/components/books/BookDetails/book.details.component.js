@@ -169,7 +169,9 @@ class BookDetails extends React.Component{
      }
   }
     const mapStateToProps = (state,props) =>{   
+      console.log(state);
       const book = state.book.books;
+
     if(book){
      const oneBook = book.filter((book)=>{
        return book._id == props.match.params.id
@@ -188,3 +190,4 @@ class BookDetails extends React.Component{
     
     };
 export default connect(mapStateToProps)(withStyles(styles)(BookDetails))
+ 
