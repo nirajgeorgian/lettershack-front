@@ -15,14 +15,17 @@ import Divider from '@material-ui/core/Divider';
 import { connect } from 'react-redux';
 import Avatar from './avatar.js'; 
 import { setStartUsers } from '../../actions/actionCreator/users/setUsers';
+import { getOneBook } from '../../actions/actionCreator/books/books.action';
 import { styles } from './styles'; 
-const cards = [1, 2, 3, 4, 5, 6];
+
 
 class Profile extends React.Component {
   constructor(props){
     super(props);
   }
-   
+  getBooks = (id) =>{
+    
+  }
   render(){
     const { classes } = this.props;  
   return (
@@ -83,11 +86,12 @@ class Profile extends React.Component {
             </div>
           </div>
         </div>
-        <div className={classNames(classes.layout, classes.cardGrid)}>
-          {/* End hero unit */}
+     <div className={classNames(classes.layout, classes.cardGrid)}>
+        {/* End hero unit */}
           <Grid container spacing={40}>
-            {cards.map(card => (
-              <Grid item key={card} sm={6} md={6} lg={6}>
+        {this.props.book?(
+           this.props.book.map(book => (
+              <Grid item key={book} sm={6} md={6} lg={6}>
               <div>     
               <Card className={classes.card}>
                 <Grid container>
@@ -99,19 +103,15 @@ class Profile extends React.Component {
                 </Grid>
                 <Grid item sm={6}>
                 <CardMedia
-                title="Live from space album cover"
+                title={book.title}
                 />
                 <div className={classes.details}>
                   <CardContent className={classes.content}>
-                    <Typography variant="headline" className={classes.title}>Live From Space</Typography>
-                    <Typography variant="subheading" className={classes.title} color="textSecondary">
-                      Mac Miller
-                    </Typography>
+                    <Typography variant="headline" className={classes.title}>{book.title}</Typography>
                   </CardContent>
                   <CardContent>
                   <Typography className={classes.para}>
-                    California beaches are the best in the world, during the summer many come visit the place
-                    It attracts a lot of visitors every year  
+                  {book.description}
                  </Typography>
                 </CardContent>
                 </div>
@@ -120,9 +120,10 @@ class Profile extends React.Component {
               </Card>
             </div>
               </Grid>
-            ))}
-          </Grid>
-        </div>
+           ))
+         ):('')}
+        </Grid>
+       </div>
       </main>
       {/* Footer */}
       <footer className={classes.footer}>
@@ -144,8 +145,17 @@ Profile.propTypes = {
 };
 
   const mapStateToProps = (state,props) =>{   
-        const users = state.user.data;
-        console.log(users);
+        const books = state.book.books;
+        let book;
+        if(!books){
+          getOneBook(props.match.params.id);
+        }else{
+           book = books.filter((book)=>{
+            return book.author ==  props.match.params.id
+          })
+
+        }  
+      const users = state.user.data;
       if(users){
         const oneUser = users.data.filter((user)=>{
           return user._id == props.match.params.id
@@ -153,6 +163,7 @@ Profile.propTypes = {
          if(oneUser){ 
          return{
            user: oneUser,
+           book:book
         }
       }else {
         setStartUsers();
