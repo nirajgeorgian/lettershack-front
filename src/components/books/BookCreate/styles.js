@@ -9,7 +9,7 @@ export default theme => ({
     },
       
     text:{
-      paddingBottom:20,
+     // paddingBottom:20,
       
   },
   divider:{
@@ -57,6 +57,13 @@ export default theme => ({
     },
     chip: {
       margin: theme.spacing.unit / 2,
+    }, 
+    formControl: {
+      margin: theme.spacing.unit,
+      minWidth: 120,
     },
+    selectEmpty: {
+      marginTop: theme.spacing.unit * 2,
+    }
   });
    

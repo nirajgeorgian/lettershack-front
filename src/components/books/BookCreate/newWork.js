@@ -16,8 +16,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import { withRouter} from 'react-router-dom'
+import { connect } from 'react-redux';
 import placeholder from '../../../img/Placeholder.jpg';
-import { genre, language } from './data';
+import { genre, language, copyright } from './data';
 import styles from './styles';
 
 class NewWork extends Component{
@@ -31,7 +32,13 @@ class NewWork extends Component{
         language:'',
         error:'',
         tagItem:'',
-        tags:[]
+        tags:[],
+        author:''
+      }
+    }
+    componentDidMount=()=>{
+      if(this.props.author){
+       this.setState(()=>({author:this.props.author}))
       }
     }
     onSubmit = (e) =>{
@@ -39,8 +46,7 @@ class NewWork extends Component{
       if(!this.state.description || !this.state.title){
         this.setState(()=>({error:'please provide title and description'}));
     }else{
-      	this.props.onStateChange(this.state)
-				this.props.onFormSubmit()
+      this.props.onFormSubmit(this.state)
      }
     }
 
@@ -62,6 +68,11 @@ class NewWork extends Component{
       const language = e.target.value;
       this.setState(()=>({language}));
     }
+    
+    onCopyrightChange = (e) =>{
+      const copyright = e.target.value;
+      this.setState(()=>({copyright}));
+    } 
 
     onTagsChange = (e) =>{
       const tag = e.target.value;
@@ -88,13 +99,14 @@ class NewWork extends Component{
         return { tags };
       });
     };
-    handleNext = () =>{
-      return this.props.history.push('/editor')
-    }
+    
+     
+    
     handleCancel = () =>{
       return this.props.history.push('/component')
     }
     render(){
+     
       const {classes} = this.props;
     return(
         <React.Fragment>
@@ -112,6 +124,7 @@ class NewWork extends Component{
             <Grid item sm={9}>
               <Card>
                 <CardContent>
+                {this.state.error && <p>{this.state.error}</p>}
                   <form onSubmit={this.onSubmit}>
                   <Typography>Story Details</Typography>
                   <Divider className={classes.divider}/>
@@ -191,21 +204,27 @@ class NewWork extends Component{
                   })}
 
                   <Divider className={classes.divider}/>
-                  <FormControl>
+                  <FormControl
+                  className={classes.formControl}
+                  >
                   <InputLabel className={classes.FormLabel} htmlFor="add-genre">Genre</InputLabel>
                    <Select
-                   className={classes.text}                 
-                   id="bootstrap-input"
-                   displayEmpty={true} 
-                   value={0}
-
-                  input={<Input disableUnderline={true} name="genre" id="add-genre" />}
+                   value={this.state.genre}
+                   onChange={this.onGenreChange}
+                   input={<Input 
+                    disableUnderline={true} 
+                    name="genre" 
+                    id="add-genre"    
+                   />} 
+                   displayEmpty
+                   name="genre"
+                   className={classes.selectEmpty} 
                  >
                   
                  {genre.map(data =>{
                    return(
                      <MenuItem
-                     value={data.indexOf()}
+                     value={data}
                      >
                      {data}
                      </MenuItem>
@@ -215,39 +234,53 @@ class NewWork extends Component{
                 </FormControl>
                 <Divider className={classes.divider}/>
                  <Grid Container className={classes.root}>
-                   <Grid item sm={6}>
-                   <FormControl>
+                   <Grid item sm>
+                   <FormControl 
+                     className={classes.formControl}
+                   >
                   <InputLabel className={classes.FormLabel} htmlFor="add-language">Language</InputLabel>
-                   <Select
-                   className={classes.text}
-                   id="bootstrap-input"
-                   value={10}
+                  <Select
+                  onChange={this.onLanguageChange}
+                  value={this.state.language}
                   input={<Input disableUnderline={true} name="language" id="add-language" />}
+                  displayEmpty
+                  name="language"
+                  className={classes.selectEmpty} 
                  >
-                  <MenuItem value="">
-                  <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                {language.map(data =>{
+                   return(
+                     <MenuItem
+                     value={data}
+                     >
+                     {data}
+                     </MenuItem>
+                   );
+                 })}
                  </Select>
                 </FormControl>
                    </Grid>
-                   <Grid item sm={6}>
-                   <FormControl>
+                   <Grid item sm>
+                   <FormControl 
+                     className={classes.formControl}
+                   >
                   <InputLabel className={classes.FormLabel} htmlFor="add-copyright">Copyright</InputLabel>
-                   <Select
-                   className={classes.text}
-                   id="bootstrap-input"
-                   value={10}
-                  input={<Input disableUnderline={true} name="copyright" id="add-copyright" />}
+                  <Select
+                  onChange={this.onCopyrightChange}
+                  value={this.state.copyright}
+                  input={<Input disableUnderline={true} name="copyright" id="copyright" />}
+                  displayEmpty
+                  name="copyright"
+                  className={classes.selectEmpty} 
                  >
-                  <MenuItem value="">
-                  <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                {copyright.map(data =>{
+                   return(
+                     <MenuItem
+                     value={data}
+                     >
+                     {data}
+                     </MenuItem>
+                   );
+                 })}
                  </Select>
                 </FormControl>
                    </Grid>
@@ -264,7 +297,7 @@ class NewWork extends Component{
                  variant="contained" 
                  color="primary" 
                  className={classes.button}
-                 onClick={this.handleNext}
+                 onClick={this.onSubmit}
                  >
                   Next
                  </Button>
@@ -285,5 +318,16 @@ NewWork.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+const mapStateToProps = (state) =>{
+	if(state.login.user){
+    return{
+      author: state.login.user._id
+    }
+   }else{
+     return{
+         author: localStorage.getItem('userId').replace(/['"]+/g, '')
+     }
+   }
+  }
 
-export default withRouter((withStyles(styles)(NewWork)));  
+export default connect(mapStateToProps)(withRouter(withStyles(styles)(NewWork)))

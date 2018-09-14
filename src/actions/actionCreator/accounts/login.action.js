@@ -12,7 +12,7 @@ export const loginLoad = creds => ({
 	isAuthenticated: false,
 	creds
 })
-
+ 
 export const loginError = message => ({
 	type: LOGIN_ERROR,
 	isFetching: false,
@@ -24,7 +24,8 @@ export const loginSuccess = user => ({
 	type: LOGIN_SUCCESS,
 	isFetching: false,
 	isAuthenticated: true,
-	id_token: user.token
+	id_token: user.token,
+	user: user
 })
 
 export const logOut = () => ({
@@ -39,11 +40,13 @@ export const loginUserDispatcher = creds => {
 		dispatch(loginLoad(creds))
 		return axios(`${consts.API_URL}/user/login`, options('POST', creds))
 			.then(res => {
+				console.log('res',res);
 				if(!res.data.status) {
 					return dispatch(loginError(res.data.message))
 				} else {
 					localStorage.set('x-auth-key', res.data.token)
-					return dispatch(loginSuccess(res.data))
+					localStorage.set('userName',res.data)
+					return dispatch(loginSuccess(res))
 				}
 			}).catch(err => dispatch(loginError(err.message)))
 	}
@@ -60,6 +63,8 @@ export const socialLoginDispatcher = (response, url) => {
 		dispatch(loginLoad({token: token}))
 		if(response.data.status) {
 			localStorage.set('x-auth-key', token)
+			localStorage.set('userName', response.data.user.name)
+			localStorage.set('userId', response.data.user._id)
 			const user = { ...response.data.user, token: token }
 			dispatch(loginSuccess(user))
 		} else {
@@ -68,3 +73,4 @@ export const socialLoginDispatcher = (response, url) => {
 		}
 	}
 }
+ 

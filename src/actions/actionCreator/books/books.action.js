@@ -15,7 +15,7 @@ const BookCreateComplete = responseData => ({
   type: BOOK_CREATE_COMPLETE,
   isFetching: false,
   data: responseData
-})
+}) 
 
 const BookCreateError = err => ({
   type: BOOK_CREATE_ERROR,

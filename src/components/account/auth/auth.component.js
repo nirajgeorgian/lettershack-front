@@ -26,8 +26,10 @@ class Auth extends Component {
 		}
 	}
 	authResponse = async (response, url) => {
+		
 		const token = response.accessToken
 		const data = await axios(`${consts.API_URL}/${url}`, options('POST', { access_token: token }))
+		console.log(data);
 		await this.props.socialLoginDispatcher(data, url)
 		if(this.state.redirect !== '') {
 			return this.props.history.push(this.state.redirect)
