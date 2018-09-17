@@ -8,6 +8,7 @@ import store from '../src/store/index'
 const app = express()
 const router = express.Router()
 
+//
 // enable cors
 app.use(cors())
 // serve static files
