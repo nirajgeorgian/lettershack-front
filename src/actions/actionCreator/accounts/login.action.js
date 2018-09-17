@@ -57,7 +57,8 @@ export const socialLoginDispatcher = (response, url) => {
 	if(url.split('/').includes('facebook')) {
 		token = response.data.user.facebookUserId.token
 	} else {
-		token = response.data.user.googleUserId.token
+		token = response.headers['x-auth-token'];
+		console.log('token',token);
 	}
 	return dispatch => {
 		dispatch(loginLoad({token: token}))

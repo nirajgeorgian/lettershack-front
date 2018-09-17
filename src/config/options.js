@@ -14,4 +14,5 @@ const options = (method = 'GET', data = {}) => ({
   data: data
 })
 
+console.log(token);
 export default options

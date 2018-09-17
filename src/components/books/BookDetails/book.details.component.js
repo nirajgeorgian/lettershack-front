@@ -25,7 +25,7 @@ class BookDetails extends React.Component{
    }
    getAuthor(id){
     const user = this.props.users.data.filter((user)=> user._id == id);
-    return user[0].username;
+    return user[0].name;
     console.log(user);
   }
   handleChapter=(chapter)=>{

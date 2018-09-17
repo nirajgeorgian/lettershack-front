@@ -29,6 +29,7 @@ export const createBookDispatcher = data => {
 		console.log(options('POST', data=data));
     return axios(`${config.API_URL}/books`,  options('POST', data=data))
       .then(res => {
+        console.log(res);
         if(res.data.status) {
           dispatch(BookCreateComplete(res.data))
         } else {
