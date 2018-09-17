@@ -51,6 +51,7 @@ class HomeComponent extends Component {
    getAuthor(id){
 		 const user = this.props.users.data.filter((user)=> user._id == id);
 		 return user[0].name;
+		 //
 	 }
 	render() {
 		console.log(this.props);
